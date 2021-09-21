@@ -1,26 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Title title="Leaderboard"/>
+  <table-departements :data_departements="data_departements" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Title from './atoms/Title'
+import TableDepartements from './components/TableDepartements.vue'
+
+const url = 'http://localhost:2222/api/departements'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Title,
+    TableDepartements
+  },
+  data: function() {
+    return {
+      data_departements: []
+    }
+  },
+  async mounted() {
+    console.log(this.data_departements)
+    const res = await fetch(url)
+    const fetched_data = await res.json()
+    this.data_departements = fetched_data
+    console.log(this.data_departements)
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
