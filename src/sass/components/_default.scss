@@ -1,0 +1,16 @@
+body {
+    background-color: $bg_dark;
+    color: white;
+    margin: 0;
+    padding: 0;
+
+    ul {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        padding-inline-start: 0;
+        li {
+            list-style: none;
+        }
+    }
+}
