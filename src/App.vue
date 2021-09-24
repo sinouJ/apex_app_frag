@@ -7,7 +7,7 @@
 import Title from './atoms/Title'
 import TableDepartements from './components/TableDepartements.vue'
 import './sass/main.scss'
-const url = process.env.URL_DEPARTEMENTS
+const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/departements' : 'https://api-apex-frag.herokuapp.com/api/departements'
 
 export default {
   name: 'App',
@@ -26,6 +26,8 @@ export default {
     const fetched_data = await res.json()
     this.data_departements = fetched_data
     console.log(this.data_departements)
+
+    console.log(process.env)
   }
 }
 </script>
