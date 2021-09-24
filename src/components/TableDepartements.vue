@@ -33,7 +33,10 @@ export default {
         header {
             ul {
                 li {
-                    width: 33.33333333%;
+                    width: 15%;
+                    &:not(:first-child) {
+                        width: 42.5%;
+                    }
                 }
             }
         }
@@ -44,7 +47,10 @@ export default {
                 border-bottom: 1px solid #636071;
 
                 p {
-                    width: 33.3333333%;
+                    width: 15%;
+                    &:not(:first-child) {
+                        width: 42.5%;
+                    }
                 }
             }
         }

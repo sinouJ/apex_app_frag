@@ -1,5 +1,5 @@
 <template>
-  <Title title="Leaderboard"/>
+  <Title title="FRAG" class="container"/>
   <table-departements :data_departements="data_departements" />
 </template>
 
