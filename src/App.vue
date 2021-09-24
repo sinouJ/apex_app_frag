@@ -7,7 +7,7 @@
 import Title from './atoms/Title'
 import TableDepartements from './components/TableDepartements.vue'
 import './sass/main.scss'
-const url = 'http://localhost:2222/api/departements'
+const url = process.env.URL_DEPARTEMENTS
 
 export default {
   name: 'App',
