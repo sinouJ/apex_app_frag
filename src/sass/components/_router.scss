@@ -1,0 +1,8 @@
+a {
+    &.router-link-exact-active {
+        background-color: lightblue;
+        border-radius: 12px;
+        float: left;
+        width: 48px;
+    }
+}

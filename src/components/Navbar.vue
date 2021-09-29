@@ -5,13 +5,11 @@
             <li>
                 <router-link to="/home">
                     <home/>
-                    <p>Home</p>
                 </router-link>
             </li>
             <li>
                 <router-link to="/community">
                     <people/>
-                    <p>Community</p>
                 </router-link>
             </li>
           </ul>
@@ -41,13 +39,18 @@ export default {
         bottom: 0;
         left: 0;
         background-color: #1e1f2c;
-        border-top: 1px solid #636071;
+        border: 1px solid #636071;
+        border-bottom: 0;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
+        box-sizing: border-box;
 
         .ion {
             font-size: 1.75rem;
             display: flex;
             justify-content: center;
             fill: white;
+            padding: 10px 0;
         }
     }
 </style>
