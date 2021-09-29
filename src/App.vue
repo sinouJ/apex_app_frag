@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <Title title="FRAG" class="container"/>
   <table-departements :data_departements="data_departements" />
 </template>
@@ -6,6 +7,8 @@
 <script>
 import Title from './atoms/Title'
 import TableDepartements from './components/TableDepartements.vue'
+import Navbar from './components/Navbar.vue'
+
 import './sass/main.scss'
 const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/departements' : 'https://api-apex-frag.herokuapp.com/api/departements'
 
@@ -13,7 +16,8 @@ export default {
   name: 'App',
   components: {
     Title,
-    TableDepartements
+    TableDepartements,
+    Navbar
   },
   data: function() {
     return {
