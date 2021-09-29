@@ -2,14 +2,18 @@
   <nav>
       <div class="leftcontent">
           <ul>
-              <li>
-                  <home/>
-                  <p>Home</p>
-              </li>
-              <li>
-                  <people/>
-                  <p>Community</p>
-              </li>
+            <li>
+                <router-link to="/home">
+                    <home/>
+                    <p>Home</p>
+                </router-link>
+            </li>
+            <li>
+                <router-link to="/community">
+                    <people/>
+                    <p>Community</p>
+                </router-link>
+            </li>
           </ul>
       </div>
       <div class="rightcontent">
