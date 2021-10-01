@@ -45,6 +45,7 @@ export default {
                 display: flex;
                 justify-content: space-around;
                 border-bottom: 1px solid #636071;
+                padding: 10px 0;
 
                 p {
                     width: 15%;
