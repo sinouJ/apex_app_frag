@@ -3,7 +3,7 @@
       <div class="leftcontent">
           <ul>
             <li>
-                <router-link to="/home">
+                <router-link to="/">
                     <home/>
                 </router-link>
             </li>
