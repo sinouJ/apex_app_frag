@@ -3,15 +3,13 @@
       <div class="leftcontent">
           <ul>
             <li>
-                <router-link to="/home">
+                <router-link to="/">
                     <home/>
-                    <p>Home</p>
                 </router-link>
             </li>
             <li>
                 <router-link to="/community">
                     <people/>
-                    <p>Community</p>
                 </router-link>
             </li>
           </ul>
@@ -36,18 +34,22 @@ export default {
 
 <style lang="scss" scoped>
     nav {
-        width: 100%;
+        width: 95%;
         position: fixed;
-        bottom: 0;
-        left: 0;
+        bottom: 15px;
+        left: 2.5%;
         background-color: #1e1f2c;
-        border-top: 1px solid #636071;
+        border: 1px solid #636071;
+        border-radius: 35px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 48px 0px rgba(30,31,44,0.80);
 
         .ion {
             font-size: 1.75rem;
             display: flex;
             justify-content: center;
             fill: white;
+            padding: 10px 0;
         }
     }
 </style>

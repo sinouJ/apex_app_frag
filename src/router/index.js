@@ -4,7 +4,7 @@ import Community from '../views/Community.vue'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
     component: Home
   },

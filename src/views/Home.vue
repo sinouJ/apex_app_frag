@@ -17,7 +17,7 @@ export default {
     },
     data: function() {
         return {
-        data_departements: []
+            data_departements: []
         }
     },
     async mounted() {
