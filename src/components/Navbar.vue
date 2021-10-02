@@ -38,11 +38,11 @@ export default {
         position: fixed;
         bottom: 15px;
         left: 2.5%;
-        background-color: #1e1f2c;
+        background-color: rgba(8, 28, 114, 0.9);
         border: 1px solid #636071;
         border-radius: 35px;
         box-sizing: border-box;
-        box-shadow: 0px 0px 48px 0px rgba(30,31,44,0.80);
+        box-shadow: 0px 0px 48px 0px rgba(8, 28, 114,0.80);
 
         .ion {
             font-size: 1.75rem;
