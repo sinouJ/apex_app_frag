@@ -1,19 +1,19 @@
 <template>
   <div class="container">
-    <Title title="Community"/>
+    <Header title="Community"/>
     <card-player :game_username="test"/>
   </div>
 </template>
 
 <script>
-import Title from '../atoms/Title.vue'
+import Header from '../components/Header.vue'
 import CardPlayer from '../components/CardPlayer.vue'
 
 export default {
     name: "Community",
     components: {
-      Title,
-      CardPlayer
+      CardPlayer,
+      Header
     },
     data: function() {
       return {

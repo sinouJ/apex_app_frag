@@ -1,8 +1,10 @@
 a {
+    width: 48px;
+    display: block;
+
     &.router-link-exact-active {
-        background-color: lightblue;
+        background: linear-gradient(90deg, rgba(158,116,253,1) 0%, rgba(217,147,209,1) 100%);
         border-radius: 12px;
         float: left;
-        width: 48px;
     }
 }
