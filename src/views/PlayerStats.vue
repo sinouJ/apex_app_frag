@@ -1,8 +1,14 @@
 <template>
-  <div class="playerStats container">
-      <Title :title="loading ? 'loading...' : player.game_username"/>
-      <p> {{player.platform ? player.platform : 'err'}} </p>
-  </div>
+    <div class="playerStats container">
+        <Title :title="loading_user ? 'loading...' : player.game_username"/>
+        <div v-if="loading_player_data">
+            <p>Loading...</p>
+        </div>
+        <div v-else>
+            <p>Platform:{{player_data.global.platform}}</p>
+            <p>Level:{{player_data.global.level}} </p>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -15,7 +21,8 @@ export default {
     },
     data: function() {
         return {
-            loading: true,
+            loading_user: true,
+            loading_player_data: true,
             player: false,
             player_data: {}
         }
@@ -32,8 +39,7 @@ export default {
         })
         const res_user = await req_user.json()
         this.player = res_user
-        this.loading = false
-        console.log(this.player)
+        this.loading_user = false
         
         const url_player_data = 'http://localhost:2222/api/stats'
         const req_player_data = await fetch(url_player_data, {
@@ -47,7 +53,8 @@ export default {
         })
         const res_player_data = await req_player_data.json()
         this.player_data = res_player_data
-        console.log(this.player_data.global.arena)
+        this.loading_player_data = false
+        console.log(this.player_data)
     }
 }
 </script>
