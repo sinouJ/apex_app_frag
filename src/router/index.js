@@ -15,7 +15,7 @@ const routes = [
     component: Community
   },
   {
-    path: 'stats/:id',
+    path: '/community/stats/:id',
     name: 'PlayerStats',
     component: PlayerStats
   }

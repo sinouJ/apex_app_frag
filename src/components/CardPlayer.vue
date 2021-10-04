@@ -1,7 +1,9 @@
 <template>
     <div class="card">
         <sub-title :title="game_username"/>
-        <Button txt="See stats"/>
+        <router-link to="/community/stats/3">
+            <Button txt="See stats"/>
+        </router-link>
     </div>
 </template>
 
