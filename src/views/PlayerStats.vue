@@ -7,6 +7,9 @@
         <div v-else>
             <p>Platform:{{player_data.global.platform}}</p>
             <p>Level:{{player_data.global.level}} </p>
+            <p>Rank: {{player_data.global.rank.rankName}}</p>
+            <p>Rank: {{player_data.global.rank.rankDiv}}</p>
+            <p>Rank: {{player_data.global.rank.rankScore}}</p>
         </div>
     </div>
 </template>
@@ -61,6 +64,8 @@ export default {
 
 <style lang="scss" scoped>
     .playerStats {
-
+        h1 {
+            text-transform: uppercase;
+        }
     }
 </style>
