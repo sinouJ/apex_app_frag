@@ -24,4 +24,11 @@ body {
     p {
         margin: 0;
     }
+
+    input {
+        &[type="text"], &[type="password"] {
+            border: 0;
+            outline: none;
+        }
+    }
 }
