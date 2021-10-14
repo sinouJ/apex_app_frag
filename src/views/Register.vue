@@ -11,12 +11,13 @@
         <div class="choosePlatform" :class="stepIndex == 1 ? 'active' : null">
             <Radio 
                 :inputArray="formData.platformArray"
-                @clicked="updatePlatform"
+                @select="updatePlatform"
             />
         </div>
         <div class="choseConnexionUsername" :class="stepIndex == 2 ? 'active' : null">
             <Radio 
-                :inputArray="formData.platformArray"
+                :inputArray="formData.usernameChoice"
+                @select="updateUsernameChoice"
             />
         </div>
         <div class="final" :class="stepIndex == 3 ? 'active' : null">
@@ -70,8 +71,21 @@ export default {
                         selected: false
                     },
                 ],
+                usernameChoice: [
+                    {
+                        id: 'Yes',
+                        value: true,
+                        selected: false
+                    },
+                    {
+                        id: 'No',
+                        value: false,
+                        selected: false
+                    }
+                ],
                 game_username: '',
-                platform: ''
+                platform: '',
+                connexion_username: ''
             },
             stepIndex: 0,
             isDisabled: true
@@ -87,6 +101,11 @@ export default {
             this.formData.platform = selectedPlatform.value
             console.log(this.formData.platform)
         },
+        updateUsernameChoice: function() {
+            const usernameChoice = this.formData.usernameChoice.find(element => element.selected == true)
+            usernameChoice.value == true ? this.formData.connexion_username = this.formData.game_username : this.formData.connexion_username = ''
+            console.log(this.formData.connexion_username)
+        },
         nextStep: async function () {
             if (this.stepIndex == 0) {
                 if (this.isDisabled == false) {
@@ -101,7 +120,10 @@ export default {
                     })
                     const res = await req.json()
 
-                    if (res.isAuthorized) this.stepIndex++
+                    if (res.isAuthorized) {
+                        this.stepIndex++
+                        return
+                    }
                     if (!res.isAuthorized) return {'error': res.msg}
                 }
                 else {
@@ -111,6 +133,7 @@ export default {
             if (this.stepIndex == 1) {
                 if (this.isDisabled == false) {
                     this.stepIndex++
+                    return
                 }
                 else {
                     console.log('enter a game username')

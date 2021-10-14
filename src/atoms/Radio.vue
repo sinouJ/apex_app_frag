@@ -18,7 +18,7 @@ export default {
         selectLabel: function(e) {
             this.inputArray.forEach(element => element.selected = false)
             e.selected = true
-            this.$emit('clicked')
+            this.$emit('select')
         }
     }
 }
