@@ -2,7 +2,13 @@
     <div class="inputText">
         <label :for="id">{{label}}</label>
         <div class="inputContainer">
-            <input type="text" :id="id">
+            <input 
+                type="text" 
+                :id="id" 
+                v-bind="$attrs" 
+                :value="inputValue" 
+                @input="inputUpdate($event)"
+            >
         </div>
     </div>
 </template>
@@ -10,10 +16,20 @@
 <script>
 export default {
     name: 'InputText',
+    model: {
+        prop: 'inputValue',
+        event: 'input'
+    },
     props: {
         id: String,
         txt: String,
         label: String,
+        inputValue: String
+    },
+    methods: {
+        inputUpdate(e) {
+            this.$emit('update', e.target.value)
+        }
     }
 }
 </script>
