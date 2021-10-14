@@ -30,6 +30,12 @@
                 label="Enter a password"
             />
         </div>
+        <div class="final" :class="stepIndex == 4 ? 'active' : null">
+            <input-password
+                id="pwd"
+                label="Enter a password"
+            />
+        </div>
         <div class="nextButton">
             <Button @clicked="previousStep" v-if="stepIndex > 0" txt="Previous"/>
             <Button @clicked="nextStep" :disabled="isDisabled" txt="Next"/>
@@ -87,6 +93,7 @@ export default {
                 platform: '',
                 connexion_username: ''
             },
+            useGameUsername: false,
             stepIndex: 0,
             isDisabled: true
         }
@@ -103,7 +110,8 @@ export default {
         },
         updateUsernameChoice: function() {
             const usernameChoice = this.formData.usernameChoice.find(element => element.selected == true)
-            usernameChoice.value == true ? this.formData.connexion_username = this.formData.game_username : this.formData.connexion_username = ''
+            this.useGameUsername = usernameChoice.value
+            this.useGameUsername == true ? this.formData.connexion_username = this.formData.game_username : this.formData.connexion_username = ''
             console.log(this.formData.connexion_username)
         },
         nextStep: async function () {
@@ -131,17 +139,27 @@ export default {
                 }
             }
             if (this.stepIndex == 1) {
-                if (this.isDisabled == false) {
-                    this.stepIndex++
+                this.stepIndex++
+                return
+            }
+            if (this.stepIndex == 2) {
+                if (this.useGameUsername == true) {
+                    this.stepIndex = 4
                     return
                 }
                 else {
-                    console.log('enter a game username')
+                    this.stepIndex++
+                    return
                 }
             }
         },
         previousStep: function () {
-            this.stepIndex--
+            if(this.stepIndex == 4) {
+                this.stepIndex = 2
+            }
+            else {
+                this.stepIndex--
+            }
         },
     },
 }
