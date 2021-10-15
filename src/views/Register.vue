@@ -9,12 +9,14 @@
             />
         </div>
         <div class="choosePlatform" :class="stepIndex == 1 ? 'active' : null">
+            <sub-title title="Select your platform"/>
             <Radio 
                 :inputArray="formData.platformArray"
                 @select="updatePlatform"
             />
         </div>
         <div class="choseConnexionUsername" :class="stepIndex == 2 ? 'active' : null">
+            <sub-title title="Do you want to login with your Apex username ?"/>
             <Radio 
                 :inputArray="formData.usernameChoice"
                 @select="updateUsernameChoice"
@@ -36,9 +38,12 @@
                 label="Enter a password"
             />
         </div>
-        <div class="nextButton">
+        <div class="nextButton" v-if="stepIndex < 3">
             <Button @clicked="previousStep" v-if="stepIndex > 0" txt="Previous"/>
             <Button @clicked="nextStep" :disabled="isDisabled" txt="Next"/>
+        </div>
+        <div class="nextButton" v-else>
+            <Button @clicked="validForm" :disabled="isDisabled" txt="Submit"/>
         </div>
     </div>
 </template>
@@ -48,6 +53,7 @@ import InputPassword from '../atoms/InputPassword.vue'
 import InputText from '../atoms/InputText.vue'
 import Button from '../atoms/Button.vue'
 import Radio from '../atoms/Radio.vue'
+import SubTitle from '../atoms/SubTitle.vue'
 
 export default {
     name: 'Register',
@@ -55,7 +61,8 @@ export default {
         InputPassword,
         InputText,
         Button,
-        Radio
+        Radio,
+        SubTitle
     },
     data: function() {
         return {
@@ -91,7 +98,8 @@ export default {
                 ],
                 game_username: '',
                 platform: '',
-                connexion_username: ''
+                connexion_username: '',
+                password: ''
             },
             useGameUsername: false,
             stepIndex: 0,
@@ -113,6 +121,26 @@ export default {
             this.useGameUsername = usernameChoice.value
             this.useGameUsername == true ? this.formData.connexion_username = this.formData.game_username : this.formData.connexion_username = ''
             console.log(this.formData.connexion_username)
+        },
+        validForm: async function() {
+            const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/user/create' : 'https://api-apex-frag.herokuapp.com/api/user/create'
+            const req = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'game_username': this.formData.game_username,
+                    'connexion_username': this.formData.connexion_username,
+                    'platform': this.formData.platform,
+                    'password': this.formData.password
+                })
+            })
+            
+            const res = await req.json()
+
+            res.status == 200 ? console.log('okok') : null
         },
         nextStep: async function () {
             if (this.stepIndex == 0) {
