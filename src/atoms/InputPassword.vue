@@ -2,7 +2,13 @@
     <div class="inputPassword">
         <label :for="id">{{label}}</label>
         <div class="inputContainer">
-            <input type="password" :id="id">
+            <input 
+                type="password" 
+                :id="id"
+                v-bind="$attrs"
+                :value="inputValue"
+                @input="inputUpdate($event)"
+            >
         </div>
     </div>
 </template>
@@ -10,10 +16,20 @@
 <script>
 export default {
     name: "InputPassword",
+    model: {
+        prop: 'inputValue',
+        event: 'input'
+    },
     props: {
         id: String,
         label: String,
-        pwd: String
+        pwd: String,
+        inputValue: String
+    },
+    methods: {
+        inputUpdate(e) {
+            this.$emit('update', e.target.value)
+        }
     }
 }
 </script>

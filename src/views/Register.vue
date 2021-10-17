@@ -36,6 +36,7 @@
             <input-password
                 id="pwd"
                 label="Enter a password"
+                @update="updatePassword"
             />
         </div>
         <div class="nextButton" v-if="stepIndex < 3">
@@ -43,6 +44,7 @@
             <Button @clicked="nextStep" :disabled="isDisabled" txt="Next"/>
         </div>
         <div class="nextButton" v-else>
+            <Button @clicked="previousStep" txt="Previous"/>
             <Button @clicked="validForm" :disabled="isDisabled" txt="Submit"/>
         </div>
     </div>
@@ -114,13 +116,19 @@ export default {
         updatePlatform: function() {
             const selectedPlatform = this.formData.platformArray.find(element => element.selected == true)
             this.formData.platform = selectedPlatform.value
+            this.formData.platform.length > 0 ? this.isDisabled = false : this.isDisabled = true
             console.log(this.formData.platform)
         },
         updateUsernameChoice: function() {
             const usernameChoice = this.formData.usernameChoice.find(element => element.selected == true)
             this.useGameUsername = usernameChoice.value
             this.useGameUsername == true ? this.formData.connexion_username = this.formData.game_username : this.formData.connexion_username = ''
-            console.log(this.formData.connexion_username)
+            usernameChoice ? this.isDisabled = false : this.isDisabled = true
+            console.log(usernameChoice)
+        },
+        updatePassword: function(e) {
+            this.formData.password = e
+            this.formData.password.length > 0 ? this.isDisabled = false : this.isDisabled = true
         },
         validForm: async function() {
             const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/user/create' : 'https://api-apex-frag.herokuapp.com/api/user/create'
@@ -158,6 +166,7 @@ export default {
 
                     if (res.isAuthorized) {
                         this.stepIndex++
+                        this.isDisabled = true
                         return
                     }
                     if (!res.isAuthorized) return {'error': res.msg}
@@ -168,15 +177,18 @@ export default {
             }
             if (this.stepIndex == 1) {
                 this.stepIndex++
+                this.isDisabled = true
                 return
             }
             if (this.stepIndex == 2) {
                 if (this.useGameUsername == true) {
                     this.stepIndex = 4
+                    this.isDisabled = true
                     return
                 }
                 else {
                     this.stepIndex++
+                    this.isDisabled = true
                     return
                 }
             }
