@@ -2,7 +2,7 @@
     <div class="login">
         <p>Login</p>
         <router-link to="/register">Register</router-link>
-        <p>Tet</p>
+        <p>Test</p>
     </div>
 </template>
 
