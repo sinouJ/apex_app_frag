@@ -127,14 +127,12 @@ export default {
             const selectedPlatform = this.formData.platformArray.find(element => element.selected == true)
             this.formData.platform = selectedPlatform.value
             this.formData.platform.length > 0 ? this.isDisabled = false : this.isDisabled = true
-            console.log(this.formData.platform)
         },
         updateUsernameChoice: function() {
             const usernameChoice = this.formData.usernameChoice.find(element => element.selected == true)
             this.useGameUsername = usernameChoice.value
             this.useGameUsername == true ? this.formData.connexion_username = this.formData.game_username : this.formData.connexion_username = ''
             usernameChoice ? this.isDisabled = false : this.isDisabled = true
-            console.log(usernameChoice)
         },
         updatePassword: function(e) {
             this.formData.password = e
@@ -179,7 +177,6 @@ export default {
                 }
                 else if (res_login.status == 403) {
                     setNotification(notificationStore.invalidPassword)
-                    console.log('Invalid password')
                     return
                 }
                 else if (res_login.status == 404) {
