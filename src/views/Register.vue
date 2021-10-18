@@ -57,6 +57,9 @@ import Button from '../atoms/Button.vue'
 import Radio from '../atoms/Radio.vue'
 import SubTitle from '../atoms/SubTitle.vue'
 
+import Cookies from 'js-cookie'
+import { resolveComponent } from '@vue/runtime-core'
+
 export default {
     name: 'Register',
     components: {
@@ -131,8 +134,8 @@ export default {
             this.formData.password.length > 0 ? this.isDisabled = false : this.isDisabled = true
         },
         validForm: async function() {
-            const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/user/create' : 'https://api-apex-frag.herokuapp.com/api/user/create'
-            const req = await fetch(url, {
+            const url_register = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/user/create' : 'https://api-apex-frag.herokuapp.com/api/user/create'
+            const req_register = await fetch(url_register, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -146,9 +149,44 @@ export default {
                 })
             })
             
-            const res = await req.json()
+            const res_register = await req_register.json()
 
-            res.status == 200 ? console.log('okok') : null
+            if (res_register.status == 201) {
+                const url_login = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/user/login' : 'https://api-apex-frag.herokuapp.com/api/user/login'
+                const req_login = await fetch (url_login, {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        password: this.formData.password,
+                        connexion_username: this.formData.connexion_username
+                    })
+                })
+                const res_login = await req_login.json()
+
+                if (res_login.status == 200) {
+                    Cookies.set('token', res_login.token)
+                    this.$router.push('/')
+                }
+                else if (res_login.status == 403) {
+                    console.log('Invalid password')
+                    return
+                }
+                else if (res_login.status == 404) {
+                    console.log('User not found')
+                    return
+                }
+            }
+            else if (res_register.status == 400) {
+                console.log('User already registered')
+                return
+            }
+            else if (res_register.status == 403) {
+                console.log('You are not able to access this area')
+                return
+            }
         },
         nextStep: async function () {
             if (this.stepIndex == 0) {
