@@ -1,5 +1,6 @@
 <template>
     <div class="register">
+        <vue-notification-list position="top-left"></vue-notification-list>
         <img src="../assets/logo.png">
         <div class="checkUsername" :class="stepIndex == 0 ? 'active' : null">
             <input-text 
@@ -51,14 +52,20 @@
 </template>
 
 <script>
+// Components
 import InputPassword from '../atoms/InputPassword.vue'
 import InputText from '../atoms/InputText.vue'
 import Button from '../atoms/Button.vue'
 import Radio from '../atoms/Radio.vue'
 import SubTitle from '../atoms/SubTitle.vue'
 
+// Cookies
 import Cookies from 'js-cookie'
-import { resolveComponent } from '@vue/runtime-core'
+
+// Toasts
+import { useNotificationStore } from '@dafcoe/vue-notification'
+const { setNotification } = useNotificationStore()
+import notificationStore from '../assets/notification.store'
 
 export default {
     name: 'Register',
@@ -171,6 +178,7 @@ export default {
                     this.$router.push('/')
                 }
                 else if (res_login.status == 403) {
+                    setNotification(notificationStore.invalidPassword)
                     console.log('Invalid password')
                     return
                 }
@@ -207,7 +215,9 @@ export default {
                         this.isDisabled = true
                         return
                     }
-                    if (!res.isAuthorized) return {'error': res.msg}
+                    if (res.isAuthorized == false) {
+                        setNotification(notificationStore.forbiddenUser)
+                    }
                 }
                 else {
                     console.log('enter a game username')
