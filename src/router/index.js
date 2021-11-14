@@ -4,6 +4,7 @@ import Community from '../views/Community.vue'
 import Register from '../views/Register'
 import Login from '../views/Login'
 import checkToken from '../utils/checkToken'
+import PlayerStats from '../views/PlayerStats.vue'
 
 const routes = [
   {
@@ -36,6 +37,14 @@ const routes = [
     component: Login,
     meta: {
       isProtected: false
+    }
+  },
+  {
+    path: '/community/stats/:id',
+    name: 'PlayerStats',
+    component: PlayerStats,
+    meta: {
+      isProtected: true
     }
   }
 ]
