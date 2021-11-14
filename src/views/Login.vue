@@ -74,8 +74,6 @@ export default {
             
             const res = await req.json()
 
-            console.log(process.env.NODE_ENV)
-
             if (res.status == 200) {
                 Cookies.set('token', res.token)
                 this.$router.push('/')

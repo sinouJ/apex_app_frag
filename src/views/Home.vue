@@ -23,13 +23,9 @@ export default {
         }
     },
     async mounted() {
-        console.log(this.data_departements)
         const req = await fetch(url)
         const res = await req.json()
         this.data_departements = res
-        console.log(this.data_departements)
-
-        console.log(process.env)
     }
 }
 </script>

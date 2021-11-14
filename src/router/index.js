@@ -49,10 +49,7 @@ router.beforeEach(async(to, from, next) => {
   
   const res = await checkToken()
 
-  console.log(res)
-
   if (res === false && to.meta.isProtected) {
-    console.log('condition ok')
     next({name: 'Login'})
   }
   else next()
