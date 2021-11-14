@@ -3,43 +3,59 @@ import Home from '../views/Home.vue'
 import Community from '../views/Community.vue'
 import Register from '../views/Register'
 import Login from '../views/Login'
-
-const isAuthenticated = false
+import checkToken from '../utils/checkToken'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
-    beforeEnter: (to, from, next) => {
-      if (to.name !== 'Login' && !isAuthenticated) next({name: 'Login'})
-      else next()
+    meta: {
+      isProtected: true
     }
   },
   {
     path: '/community',
     name: 'Community',
     component: Community,
-    beforeEnter: (to, from, next) => {
-      if (to.name !== 'Login' && !isAuthenticated) next ({name: 'Login'})
-      else next()
+    meta: {
+      isProtected: true
     }
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    meta: {
+      isProtected: false
+    }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      isProtected: false
+    }
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach(async(to, from, next) => {
+  
+  const res = await checkToken()
+
+  console.log(res)
+
+  if (res === false && to.meta.isProtected) {
+    console.log('condition ok')
+    next({name: 'Login'})
+  }
+  else next()
 })
 
 export default router
