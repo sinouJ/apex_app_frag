@@ -32,6 +32,10 @@ export default {
         box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.49);
         color: white;
 
+        a {
+            width: 100%;
+        }
+
         .button {
             margin: 0 auto;
         }
