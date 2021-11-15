@@ -41,7 +41,7 @@ export default {
             }
         })
         const res_user = await req_user.json()
-        this.player = res_user
+        this.player = await res_user
         this.loading_user = false
         
         const url_player_data = 'http://localhost:2222/api/stats'
@@ -50,8 +50,8 @@ export default {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'game_username': this.player.game_username,
-                'platform': this.player.platform
+                'game_username': this.player.user_found.game_username,
+                'platform': this.player.user_found.platform
             }
         })
         const res_player_data = await req_player_data.json()

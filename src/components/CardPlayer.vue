@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <sub-title :title="game_username"/>
-        <router-link to="/community/stats/3">
+        <router-link :to="`/community/stats/${id}`">
             <Button txt="See stats"/>
         </router-link>
     </div>
@@ -18,7 +18,8 @@ export default {
         Button
     },
     props: {
-        game_username: String
+        game_username: String,
+        id: Number
     }
 }
 </script>
