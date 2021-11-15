@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Community"/>
-    <card-player :game_username="test"/>
+    <card-player :game_username="username" :id="id"/>
   </div>
 </template>
 
@@ -17,7 +17,8 @@ export default {
     },
     data: function() {
       return {
-        test: 'Nouuns'
+        username: 'Nouuns',
+        id: 10
       }
     }
 }

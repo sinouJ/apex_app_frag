@@ -1,7 +1,9 @@
 <template>
     <div class="card">
         <sub-title :title="game_username"/>
-        <Button txt="See stats"/>
+        <router-link :to="`/community/stats/${id}`">
+            <Button txt="See stats"/>
+        </router-link>
     </div>
 </template>
 
@@ -16,7 +18,8 @@ export default {
         Button
     },
     props: {
-        game_username: String
+        game_username: String,
+        id: Number
     }
 }
 </script>
@@ -28,6 +31,10 @@ export default {
         padding: 15px 5px;
         box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.49);
         color: white;
+
+        a {
+            width: 100%;
+        }
 
         .button {
             margin: 0 auto;
