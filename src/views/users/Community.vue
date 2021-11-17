@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue'
-import CardPlayer from '../components/CardPlayer.vue'
+import Header from '../../components/Header.vue'
+import CardPlayer from '../../components/CardPlayer.vue'
 
 export default {
   name: "Community",

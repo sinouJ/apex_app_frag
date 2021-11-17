@@ -53,11 +53,11 @@
 
 <script>
 // Components
-import InputPassword from '../atoms/InputPassword.vue'
-import InputText from '../atoms/InputText.vue'
-import Button from '../atoms/Button.vue'
-import Radio from '../atoms/Radio.vue'
-import SubTitle from '../atoms/SubTitle.vue'
+import InputPassword from '../../atoms/InputPassword.vue'
+import InputText from '../../atoms/InputText.vue'
+import Button from '../../atoms/Button.vue'
+import Radio from '../../atoms/Radio.vue'
+import SubTitle from '../../atoms/SubTitle.vue'
 
 // Cookies
 import Cookies from 'js-cookie'
@@ -65,7 +65,7 @@ import Cookies from 'js-cookie'
 // Toasts
 import { useNotificationStore } from '@dafcoe/vue-notification'
 const { setNotification } = useNotificationStore()
-import notificationStore from '../assets/notification.store'
+import notificationStore from '../../assets/notification.store'
 
 export default {
     name: 'Register',
