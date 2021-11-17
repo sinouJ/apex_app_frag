@@ -1,7 +1,7 @@
 <template>
     <div class="register">
         <vue-notification-list position="top-left"></vue-notification-list>
-        <img src="../assets/logo.png">
+        <img src="../../assets/logo.png">
         <div class="checkUsername" :class="stepIndex == 0 ? 'active' : null">
             <input-text 
                 id="checkUsername"

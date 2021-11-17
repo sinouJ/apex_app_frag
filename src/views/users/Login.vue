@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <vue-notification-list position="top-left"></vue-notification-list>
-        <img src="../assets/logo.png">
+        <img src="../../assets/logo.png">
         <form @submit.prevent="validForm">
             <div class="checkUsername">
                 <input-text 

@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Community from '../views/Community.vue'
-import Register from '../views/Register'
-import Login from '../views/Login'
+import Home from '../views/users/Home.vue'
+import Community from '../views/users/Community.vue'
+import Register from '../views/users/Register'
+import Login from '../views/users/Login'
 import checkToken from '../utils/checkToken'
-import PlayerStats from '../views/PlayerStats.vue'
+import PlayerStats from '../views/users/PlayerStats.vue'
 
 const routes = [
   {
