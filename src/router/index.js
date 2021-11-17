@@ -40,7 +40,7 @@ const routes = [
     }
   },
   {
-    path: '/community/stats/:id',
+    path: '/community/stats/:game_username',
     name: 'PlayerStats',
     component: PlayerStats,
     meta: {

@@ -31,13 +31,13 @@ export default {
         }
     },
     async mounted() {
-        const url_user = 'http://localhost:2222/api/user/id'
+        const url_user = 'http://localhost:2222/api/user/username'
         const req_user = await fetch(url_user, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                id: this.$route.params.id
+                game_username: this.$route.params.game_username
             }
         })
         const res_user = await req_user.json()

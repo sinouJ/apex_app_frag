@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 const getUsername = async () => {
     let isAuthenticated = false
     const token = Cookies.get('token')
-    const url = 'http://localhost:2222/api/user/username'
+    const url = 'http://localhost:2222/api/user/usernameAuth'
 
     const req = await fetch(url, {
         method: 'GET',
