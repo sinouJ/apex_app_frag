@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <Header title="FRAG"/>
+        <router-link to="/admin">Admin</router-link>
         <table-departements :data_departements="data_departements" />
     </div>
 </template>
