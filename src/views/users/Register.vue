@@ -53,8 +53,8 @@
 
 <script>
 // Components
-import InputPassword from '../../atoms/InputPassword.vue'
-import InputText from '../../atoms/InputText.vue'
+import InputPassword from '../../atoms/forms/InputPassword.vue'
+import InputText from '../../atoms/forms/InputText.vue'
 import Button from '../../atoms/Button.vue'
 import Radio from '../../atoms/Radio.vue'
 import SubTitle from '../../atoms/SubTitle.vue'
