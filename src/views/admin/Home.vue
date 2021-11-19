@@ -1,6 +1,6 @@
 <template>
-    <div class="home">
-        <h1>AdminHome</h1>,
+    <div class="home container">
+        <Header title="Dashboard admin"/>
         <Tab :tabs="tabs"/>
         <router-view/>
     </div>
@@ -8,11 +8,13 @@
 
 <script>
 import Tab from '../../components/Tab.vue'
+import Header from '../../components/Header.vue'
 
 export default {
     name: 'AdminHome',
     components: {
-        Tab
+        Tab,
+        Header
     },
     data: function() {
         return {
