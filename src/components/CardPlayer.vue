@@ -9,7 +9,7 @@
 
 <script>
 import SubTitle from '../atoms/SubTitle.vue'
-import Button from '../atoms/Button.vue'
+import Button from '../atoms/buttons/Button.vue'
 
 export default {
     name: "CardPlayer",

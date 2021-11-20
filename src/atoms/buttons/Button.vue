@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    @import '../sass/main';
+    @import '../../sass/main';
 
     .button {
         background: linear-gradient(90deg, rgba(158,116,253,1) 0%, rgba(217,147,209,1) 100%);

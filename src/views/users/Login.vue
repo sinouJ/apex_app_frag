@@ -26,7 +26,7 @@
 // Components
 import InputPassword from '../../atoms/forms/InputPassword.vue'
 import InputText from '../../atoms/forms/InputText.vue'
-import Button from '../../atoms/Button.vue'
+import Button from '../../atoms/buttons/Button.vue'
 
 // Cookies
 import Cookies from 'js-cookie'
