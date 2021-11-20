@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import TableDepartements from '../../components/TableDepartements.vue'
+import TableDepartements from '../../components/Table/TableDepartements.vue'
 import Header from '../../components/Header.vue'
 
 const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/departements' : 'https://api-apex-frag.herokuapp.com/api/departements'

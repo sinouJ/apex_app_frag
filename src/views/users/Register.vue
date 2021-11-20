@@ -196,7 +196,7 @@ export default {
         nextStep: async function () {
             if (this.stepIndex == 0) {
                 if (this.isDisabled == false) {
-                    const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/user/check' : 'https://api-apex-frag.herokuapp.com/api/user/check'
+                    const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/auth/check' : 'https://api-apex-frag.herokuapp.com/api/auth/check'
                     const req = await fetch(url, {
                         method: 'GET',
                         headers: {

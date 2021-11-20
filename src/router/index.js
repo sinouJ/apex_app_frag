@@ -12,7 +12,8 @@ import PlayerStats from '../views/users/PlayerStats.vue'
 import AdminHome from '../views/admin/Home'
 
 // Admin components
-import TableUsers from '../components/TableUsers'
+import TableUsers from '../components/Table/TableUsers'
+import TableAuthUsers from '../components/Table/TableAuthUsers'
 
 const routes = [
   {
@@ -71,7 +72,7 @@ const routes = [
       {
         path: 'users/auth',
         name: 'UserAuth',
-        component: TableUsers,
+        component: TableAuthUsers,
       },
       {
         path: 'users',
