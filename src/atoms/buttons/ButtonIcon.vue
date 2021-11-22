@@ -36,7 +36,7 @@ export default {
     }
 
     .delete {
-        background-color: $falls;
+        background-color: $red;
     }
 
     .create {

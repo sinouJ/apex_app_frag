@@ -9,7 +9,7 @@
         </header>
         <header class="addUserForm">
             <input-text/>
-            <button-icon class="create"> <add/> </button-icon>
+            <button-icon class="create" @clicked="addAuthUser"> <add/> </button-icon>
         </header>
         <main>
             <div v-if="!loading && tableData && tableData.users.length > 0">
@@ -63,6 +63,11 @@ export default {
         this.loading = false
         
         return
+    },
+    methods: {
+        addAuthUser: function() {
+            
+        }
     }
 }
 </script>
@@ -81,7 +86,7 @@ export default {
 
             &.addUserForm {
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
             }
         }
