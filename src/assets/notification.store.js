@@ -34,5 +34,29 @@ module.exports = {
         "duration": 10000,
         "showDurationProgress": true,
         "appearance": "light"
+    },
+    unableUser: {
+        "message": "Unable to create user",
+        "type": "alert",
+        "showIcon": true,
+        "dismiss": {
+            "manually": true,
+            "automatically": true
+        },
+        "duration": 10000,
+        "showDurationProgress": true,
+        "appearance": "light"
+    },
+    userExists: {
+        "message": "User already exists",
+        "type": "alert",
+        "showIcon": true,
+        "dismiss": {
+            "manually": true,
+            "automatically": true
+        },
+        "duration": 10000,
+        "showDurationProgress": true,
+        "appearance": "light"
     }
 }

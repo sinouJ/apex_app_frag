@@ -1,4 +1,5 @@
 <template>
+    <vue-notification-list position="top-left"></vue-notification-list>
     <div class="home container">
         <Header title="Dashboard admin"/>
         <Tab :tabs="tabs"/>

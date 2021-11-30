@@ -8,7 +8,10 @@
             </ul>
         </header>
         <header class="addUserForm">
-            <input-text/>
+            <input-text-table
+                id="authUsername"
+                @update="updateUsername"
+            />
             <button-icon class="create" @clicked="addAuthUser"> <add/> </button-icon>
         </header>
         <main>
@@ -17,8 +20,8 @@
                     <p> {{user.id}} </p>
                     <p> {{user.game_username}} </p>
                     <p> 
-                        <button-icon class="delete"> <trash/> </button-icon> 
-                        <button-icon class="edit"> <more/> </button-icon>
+                        <button-icon class="delete" @clicked="deleteAuthUser(user.id)"> <trash/> </button-icon> 
+                        <button-icon class="edit" @clicked="editAuthUser(user.id)"> <more/> </button-icon>
                     </p>
                 </div>
             </div>
@@ -32,18 +35,23 @@
 <script>
 // Components
 import ButtonIcon from '../../atoms/buttons/ButtonIcon.vue'
-import InputText from '../../atoms/forms/InputText.vue'
+import InputTextTable from '../../atoms/forms/InputTextTable.vue'
 
 // Icons
 import Trash from 'vue-ionicons/dist/ios-trash.vue'
 import More from 'vue-ionicons/dist/ios-more.vue'
 import Add from 'vue-ionicons/dist/ios-add.vue'
 
+// Toasts
+import { useNotificationStore } from '@dafcoe/vue-notification'
+const { setNotification } = useNotificationStore()
+import notificationStore from '../../assets/notification.store'
+
 export default {
     name: 'TableUsers',
     components: {
         ButtonIcon,
-        InputText,
+        InputTextTable,
         Trash,
         More,
         Add
@@ -51,7 +59,8 @@ export default {
     data: function() {
         return {
             tableData: [],
-            loading: true
+            loading: true,
+            username: String
         }
     },
     async mounted() {
@@ -65,8 +74,59 @@ export default {
         return
     },
     methods: {
-        addAuthUser: function() {
+        updateUsername: function(e) {
+            this.username = e
+        },
+        addAuthUser: async function() {
+            const url = process.env.NODE_ENV === "development" ? 'http://localhost:2222/api/auth/create' : 'https://api-apex-frag/herokuapp.com/api/auth/create'
             
+            const req = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    game_username: this.username
+                })
+            })
+
+            const res = await req.json()
+
+            if (res.status === 409) {
+                setNotification(notificationStore.userExists)
+                return
+            }
+            if (res.status === 500) {
+                setNotification(notificationStore.unableUser)
+                return
+            }
+            
+            this.tableData.users.push(res.user.user)
+            return
+
+        },
+        deleteAuthUser: async function(id) {
+            const elementIndex = this.tableData.users.findIndex( user => user.id === id)
+            const url = process.env.NODE_ENV === "development" ? 'http://localhost:2222/api/auth/delete' : 'https://api-apex-frag/herokuapp.com/api/auth/delete'
+            
+            const req = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({id})
+            })
+
+            console.log('before', this.tableData.users, elementIndex)
+            
+            this.tableData.users.splice(elementIndex, 1)
+            console.log('after', this.tableData.users)
+            return req
+        },
+        editAuthUser: function(id) {
+            console.log('edit', id)
         }
     }
 }
@@ -76,6 +136,8 @@ export default {
     .table {
         header {
             ul {
+                font-weight: bold;
+
                 li {
                     width: 15%;
                     &:not(:first-child) {
@@ -86,8 +148,9 @@ export default {
 
             &.addUserForm {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-start;
                 align-items: center;
+                width: 100%;
             }
         }
         main {
