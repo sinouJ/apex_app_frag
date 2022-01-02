@@ -28,16 +28,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    @import '@/sass/helpers/variables';
+
     .inputText {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
 
         input {
             width: 100%;
             height: 40px;
             padding: 5px 10px;
             border-radius: inherit;
+            border-bottom: 1px solid $secondary_dark;
         }
     }
 </style>

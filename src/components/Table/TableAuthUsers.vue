@@ -103,6 +103,7 @@ export default {
             }
             
             this.tableData.users.push(res.user.user)
+            this.updateUsername('')
             return
 
         },
