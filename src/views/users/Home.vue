@@ -9,8 +9,7 @@
 <script>
 import TableDepartements from '../../components/Table/TableDepartements.vue'
 import Header from '../../components/Header.vue'
-
-const url2 = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/departements' : 'https://api-apex-frag.herokuapp.com/api/departements'
+import {FetchData} from '@/utils/fetch'
 
 export default {
     name: "Home",
@@ -24,8 +23,7 @@ export default {
         }
     },
     async mounted() {
-        const req = await fetch(url2)
-        const res = await req.json()
+        const res = await FetchData.get('departements')
         this.data_departements = res
     }
 }
