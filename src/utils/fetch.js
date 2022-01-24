@@ -1,7 +1,34 @@
-const fetch = (url, options) => {
-    const api_path = process.env.NODE == 'development' ? 'http://localhost:2222/api/' : 'https://api-apex-frag.herokuapp.com/api/'
+import url from './urlUtils'
 
-    fetch(api_path+url, options)
+const FetchData = {
+    get: (path, headers) => {
+        fetch(url+path, {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                ...headers
+            }
+        })
+    },
+    post: (path, body) => {
+        fetch(url+path, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+    },
+    delete: (path, options) => {
+        fetch(url+path, {
+            method: "DELETE",
+            options
+        })
+    }
 }
 
-export default fetch
+
+
+export {FetchData}
