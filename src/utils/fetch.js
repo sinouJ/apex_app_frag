@@ -1,34 +1,38 @@
 import url from './urlUtils'
 
 const FetchData = {
-    get: (path, headers) => {
-        fetch(url+path, {
+    get: async (path, headers) => {
+        const req = await fetch(url()+path, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                ...headers
+                ...headers ? headers : null
             }
         })
+        const res = await req.json()
+        return res
     },
-    post: (path, body) => {
-        fetch(url+path, {
+    post: async (path, body) => {
+        const req = await fetch(url()+path, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(body ? body : null)
         })
+        const res = await req.json()
+        return res
     },
-    delete: (path, body) => {
-        fetch(url+path, {
+    delete: async (path, body) => {
+        await fetch(url()+path, {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(body ? body : null)
         })
     }
 }

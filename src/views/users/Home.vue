@@ -9,9 +9,6 @@
 <script>
 import TableDepartements from '../../components/Table/TableDepartements.vue'
 import Header from '../../components/Header.vue'
-import {url} from '../../utils/urlUtils'
-
-const env_url = url()
 
 const url2 = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/departements' : 'https://api-apex-frag.herokuapp.com/api/departements'
 
@@ -30,8 +27,6 @@ export default {
         const req = await fetch(url2)
         const res = await req.json()
         this.data_departements = res
-
-        console.log(env_url)
     }
 }
 </script>
