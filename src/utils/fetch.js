@@ -21,10 +21,14 @@ const FetchData = {
             body: JSON.stringify(body)
         })
     },
-    delete: (path, options) => {
+    delete: (path, body) => {
         fetch(url+path, {
             method: "DELETE",
-            options
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+            body: JSON.stringify(body)
         })
     }
 }
