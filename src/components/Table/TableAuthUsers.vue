@@ -47,6 +47,9 @@ import { useNotificationStore } from '@dafcoe/vue-notification'
 const { setNotification } = useNotificationStore()
 import notificationStore from '../../assets/notification.store'
 
+// Utils
+import {FetchData} from '@/utils/fetch'
+
 export default {
     name: 'TableUsers',
     components: {
@@ -78,20 +81,9 @@ export default {
             this.username = e
         },
         addAuthUser: async function() {
-            const url = process.env.NODE_ENV === "development" ? 'http://localhost:2222/api/auth/create' : 'https://api-apex-frag/herokuapp.com/api/auth/create'
-            
-            const req = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify({
-                    game_username: this.username
-                })
-            })
+            const body = {game_username: this.username}
 
-            const res = await req.json()
+            const res = await FetchData.post('auth/create', body)
 
             if (res.status === 409) {
                 setNotification(notificationStore.userExists)
@@ -103,27 +95,15 @@ export default {
             }
             
             this.tableData.users.push(res.user.user)
-            this.updateUsername('')
             return
-
         },
         deleteAuthUser: async function(id) {
             const elementIndex = this.tableData.users.findIndex( user => user.id === id)
-            const url = process.env.NODE_ENV === "development" ? 'http://localhost:2222/api/auth/delete' : 'https://api-apex-frag/herokuapp.com/api/auth/delete'
-            
-            const req = await fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify({id})
-            })
+            const body = {id}
 
-            console.log('before', this.tableData.users, elementIndex)
-            
+            const req = await FetchData.delete('auth/delete', body)
             this.tableData.users.splice(elementIndex, 1)
-            console.log('after', this.tableData.users)
+            
             return req
         },
         editAuthUser: function(id) {

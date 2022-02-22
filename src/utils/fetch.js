@@ -26,7 +26,7 @@ const FetchData = {
         return res
     },
     delete: async (path, body) => {
-        await fetch(url()+path, {
+        const req = await fetch(url()+path, {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
@@ -34,6 +34,10 @@ const FetchData = {
             },
             body: JSON.stringify(body ? body : null)
         })
+
+        // const res = await req.json()
+
+        return req
     }
 }
 
