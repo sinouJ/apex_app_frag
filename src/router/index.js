@@ -7,6 +7,7 @@ import Register from '../views/users/Register'
 import Login from '../views/users/Login'
 import checkToken from '../utils/checkToken'
 import PlayerStats from '../views/users/PlayerStats.vue'
+import Profile from '../views/users/Profile'
 
 // Admin views
 import AdminHome from '../views/admin/Home'
@@ -20,6 +21,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      isProtected: true
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
     meta: {
       isProtected: true
     }

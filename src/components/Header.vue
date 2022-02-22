@@ -1,7 +1,9 @@
 <template>
     <header class="header">
         <Title :title="title"/>
-        <profile-pic :img="img"></profile-pic>
+        <router-link to="profile">
+            <profile-pic :img="img"></profile-pic>
+        </router-link>
     </header>
 </template>
 
