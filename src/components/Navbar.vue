@@ -12,6 +12,11 @@
                     <people/>
                 </router-link>
             </li>
+            <li>
+                <router-link to="departements">
+                    <list/>
+                </router-link>
+            </li>
           </ul>
       </div>
       <div class="rightcontent">
@@ -23,11 +28,14 @@
 <script>
 import Home from 'vue-ionicons/dist/ios-home.vue'
 import People from 'vue-ionicons/dist/ios-people.vue'
+import List from 'vue-ionicons/dist/ios-list.vue'
+
 export default {
     name: "Navbar",
     components: {
         Home,
-        People
+        People,
+        List
     }
 }
 </script>
