@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <vue-notification-list position="top-left"></vue-notification-list>
-        <img src="../assets/logo.png">
+        <img src="../../assets/logo.png">
         <form @submit.prevent="validForm">
             <div class="checkUsername">
                 <input-text 
@@ -24,9 +24,9 @@
 
 <script>
 // Components
-import InputPassword from '../atoms/InputPassword.vue'
-import InputText from '../atoms/InputText.vue'
-import Button from '../atoms/Button.vue'
+import InputPassword from '../../atoms/forms/InputPassword.vue'
+import InputText from '../../atoms/forms/InputText.vue'
+import Button from '../../atoms/buttons/Button.vue'
 
 // Cookies
 import Cookies from 'js-cookie'
@@ -34,7 +34,7 @@ import Cookies from 'js-cookie'
 // Toasts
 import { useNotificationStore } from '@dafcoe/vue-notification'
 const { setNotification } = useNotificationStore()
-import notificationStore from '../assets/notification.store'
+import notificationStore from '../../assets/notification.store'
 
 export default {
     name: 'Login',

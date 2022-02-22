@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+  <Navbar v-if="$route.path.includes('/admin') === false"/>
   <router-view/>
 </template>
 

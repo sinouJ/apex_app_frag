@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Title from '../atoms/Title.vue'
+import Title from '../../atoms/Title.vue'
 
 export default {
     name: 'PlayerStats',

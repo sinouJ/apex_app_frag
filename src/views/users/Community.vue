@@ -6,8 +6,9 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue'
-import CardPlayer from '../components/CardPlayer.vue'
+import Header from '../../components/Header.vue'
+import CardPlayer from '../../components/CardPlayer.vue'
+import {FetchData} from '@/utils/fetch'
 
 export default {
   name: "Community",
@@ -21,13 +22,8 @@ export default {
     }
   },
   async mounted() {
-    const url = process.env.NODE == 'develoment' ? 'http://localhost:2222/api/user/all' : 'https://api-apex-frag.herokuapp.com/api/user/all'
-
-    const req = await fetch(url)
-
-    const res = await req.json()
-
-    this.users = res
+    const res = await FetchData.get("user/all")
+    this.users = res.users
   }
 }
 </script>

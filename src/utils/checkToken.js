@@ -8,7 +8,7 @@ const getUsername = async () => {
     const req = await fetch(url, {
         method: 'GET',
         headers: {
-        authorization: token
+            authorization: token
         }
     })
 

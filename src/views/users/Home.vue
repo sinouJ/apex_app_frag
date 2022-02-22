@@ -1,15 +1,15 @@
 <template>
     <div class="container">
         <Header title="FRAG"/>
+        <router-link to="/admin">Admin</router-link>
         <table-departements :data_departements="data_departements" />
     </div>
 </template>
 
 <script>
-import TableDepartements from '../components/TableDepartements.vue'
-import Header from '../components/Header.vue'
-
-const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/departements' : 'https://api-apex-frag.herokuapp.com/api/departements'
+import TableDepartements from '../../components/Table/TableDepartements.vue'
+import Header from '../../components/Header.vue'
+import {FetchData} from '@/utils/fetch'
 
 export default {
     name: "Home",
@@ -23,8 +23,7 @@ export default {
         }
     },
     async mounted() {
-        const req = await fetch(url)
-        const res = await req.json()
+        const res = await FetchData.get('departements')
         this.data_departements = res
     }
 }

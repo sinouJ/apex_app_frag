@@ -1,7 +1,7 @@
 <template>
     <div class="register">
         <vue-notification-list position="top-left"></vue-notification-list>
-        <img src="../assets/logo.png">
+        <img src="../../assets/logo.png">
         <div class="checkUsername" :class="stepIndex == 0 ? 'active' : null">
             <input-text 
                 id="checkUsername"
@@ -53,11 +53,11 @@
 
 <script>
 // Components
-import InputPassword from '../atoms/InputPassword.vue'
-import InputText from '../atoms/InputText.vue'
-import Button from '../atoms/Button.vue'
-import Radio from '../atoms/Radio.vue'
-import SubTitle from '../atoms/SubTitle.vue'
+import InputPassword from '../../atoms/forms/InputPassword.vue'
+import InputText from '../../atoms/forms/InputText.vue'
+import Button from '../../atoms/buttons/Button.vue'
+import Radio from '../../atoms/Radio.vue'
+import SubTitle from '../../atoms/SubTitle.vue'
 
 // Cookies
 import Cookies from 'js-cookie'
@@ -65,7 +65,7 @@ import Cookies from 'js-cookie'
 // Toasts
 import { useNotificationStore } from '@dafcoe/vue-notification'
 const { setNotification } = useNotificationStore()
-import notificationStore from '../assets/notification.store'
+import notificationStore from '../../assets/notification.store'
 
 export default {
     name: 'Register',
@@ -196,7 +196,7 @@ export default {
         nextStep: async function () {
             if (this.stepIndex == 0) {
                 if (this.isDisabled == false) {
-                    const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/user/check' : 'https://api-apex-frag.herokuapp.com/api/user/check'
+                    const url = process.env.NODE_ENV == 'development' ? 'http://localhost:2222/api/auth/check' : 'https://api-apex-frag.herokuapp.com/api/auth/check'
                     const req = await fetch(url, {
                         method: 'GET',
                         headers: {

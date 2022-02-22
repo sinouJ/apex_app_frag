@@ -1,7 +1,46 @@
-const fetch = (url, options) => {
-    const api_path = process.env.NODE == 'development' ? 'http://localhost:2222/api/' : 'https://api-apex-frag.herokuapp.com/api/'
+import url from './urlUtils'
 
-    fetch(api_path+url, options)
+const FetchData = {
+    get: async (path, headers) => {
+        const req = await fetch(url()+path, {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                ...headers ? headers : null
+            }
+        })
+        const res = await req.json()
+        return res
+    },
+    post: async (path, body) => {
+        const req = await fetch(url()+path, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body ? body : null)
+        })
+        const res = await req.json()
+        return res
+    },
+    delete: async (path, body) => {
+        const req = await fetch(url()+path, {
+            method: "DELETE",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body ? body : null)
+        })
+
+        // const res = await req.json()
+
+        return req
+    }
 }
 
-export default fetch
+
+
+export {FetchData}
