@@ -38,6 +38,15 @@ const FetchData = {
         // const res = await req.json()
 
         return req
+    },
+    getapi: async (path, headers) => {
+        const req = await fetch(url()+path, {
+            headers
+        })
+
+        const res = await req.json()
+
+        return res
     }
 }
 
