@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import SubTitle from '../atoms/SubTitle.vue'
-import Button from '../atoms/buttons/Button.vue'
+import SubTitle from '../../atoms/SubTitle.vue'
+import Button from '../../atoms/buttons/Button.vue'
 
 export default {
     name: "CardPlayer",
