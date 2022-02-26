@@ -19,6 +19,7 @@ export default {
 h1 {
   font-family: 'Rubik Mono One', sans-serif;
   text-transform: uppercase;
+  font-size: 36px;
 
   &.dark {
     color: $bg_dark;
