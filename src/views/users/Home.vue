@@ -127,6 +127,10 @@ export default {
                         display: flex;
                         flex-direction: column;
 
+                        h3 {
+                            color: $light;
+                        }
+
                         img {
                             max-height: 48px;
                             max-width: 48px;
