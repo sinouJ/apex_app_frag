@@ -9,12 +9,12 @@
             </li>
             <li>
                 <router-link to="/community">
-                    <img src="../assets/icons/off_3_user.svg">
+                    <img src="../assets/icons/white_3_user.svg">
                 </router-link>
             </li>
             <li>
                 <router-link to="/departements">
-                    <img src="../assets/icons/off_paper.svg">
+                    <img src="../assets/icons/white_paper.svg">
                 </router-link>
             </li>
           </ul>
