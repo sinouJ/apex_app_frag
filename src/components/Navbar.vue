@@ -17,6 +17,11 @@
                     <img src="../assets/icons/white_paper.svg">
                 </router-link>
             </li>
+            <li>
+                <router-link to="departements">
+                    <list/>
+                </router-link>
+            </li>
           </ul>
       </div>
       <div class="rightcontent">
