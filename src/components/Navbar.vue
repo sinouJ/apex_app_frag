@@ -4,12 +4,17 @@
           <ul>
             <li>
                 <router-link to="/">
-                    <home/>
+                    <img src="../assets/icons/on_home.svg">
                 </router-link>
             </li>
             <li>
                 <router-link to="/community">
-                    <people/>
+                    <img src="../assets/icons/white_3_user.svg">
+                </router-link>
+            </li>
+            <li>
+                <router-link to="/departements">
+                    <img src="../assets/icons/white_paper.svg">
                 </router-link>
             </li>
           </ul>
@@ -21,35 +26,30 @@
 </template>
 
 <script>
-import Home from 'vue-ionicons/dist/ios-home.vue'
-import People from 'vue-ionicons/dist/ios-people.vue'
 export default {
     name: "Navbar",
-    components: {
-        Home,
-        People
-    }
 }
 </script>
 
 <style lang="scss" scoped>
+    @import '../sass/helpers/variables';
     nav {
-        width: 95%;
+        width: 100%;
         position: fixed;
-        bottom: 15px;
-        left: 2.5%;
-        background-color: rgba(8, 28, 114, 0.9);
-        border: 1px solid #636071;
-        border-radius: 35px;
-        box-sizing: border-box;
-        box-shadow: 0px 0px 48px 0px rgba(8, 28, 114,0.80);
+        bottom: 0;
+        background-color: $dark;
+        border-top: 1px solid #636071;
 
-        .ion {
-            font-size: 1.75rem;
-            display: flex;
-            justify-content: center;
-            fill: white;
-            padding: 10px 0;
+        ul {
+            padding-bottom: 10px;
+
+            img {
+                display: block;
+                width: 36px;
+                height: 36px;
+            }
         }
+
+        
     }
 </style>
