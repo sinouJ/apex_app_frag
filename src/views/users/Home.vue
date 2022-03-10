@@ -4,7 +4,7 @@
         <card-home :title="current.map" class="map_card" :class="current.code">
             <template v-slot:main>
                 <div class="map" >
-                    <p><strong>Temps restant :</strong> {{current.remainingTimer}}</p>
+                    <p><strong>Temps restant :</strong> {{this.current.timer}}</p>
                 </div>
             </template>
         </card-home>
@@ -58,48 +58,70 @@ export default {
     data: function() {
         return {
             loading: true,
+            headers: {
+                rotation: {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'type': 'maprotation?version=5'
+                    },
+                    path: 'rotation/'
+                },
+                craft: {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'type': 'crafting?version=5'
+                    },
+                    path: 'rotation/'
+                },
+                news: {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'type': 'news?lang=fr-fr'
+                    },
+                    path: 'rotation/'
+                }
+            },
             current: Object,
             next: Object,
             craft: Array,
             news: Array
         }
     },
+    methods: {
+        timer: function(self) {
+            let remainingSecs = this.current.remainingSecs
+            setInterval(async function(){
+                if (remainingSecs > 0) {
+                    remainingSecs--
+                    var hours = Math.floor(remainingSecs / 3600);
+                    remainingSecs = remainingSecs - hours * 3600;
+                    let minutes = Math.floor(remainingSecs / 60);
+                    let seconds = Math.floor(remainingSecs - minutes * 60)
+                    self.current.timer = `0${hours}:${minutes < 10 ? '0'+minutes : minutes}:${seconds < 10 ? '0'+seconds : seconds}`
+                }
+                else {
+                    const res_rotation = await FetchData.getapi(self.headers.rotation.path, self.headers.rotation.headers)
+                    this.current = res_rotation.battle_royale.current
+                    this.next = res_rotation.battle_royale.next
+                    remainingSecs = self.current.remainingSecs
+                }
+            },1000)
+        }
+    },
     async mounted() {
-        const rotation = {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'type': 'maprotation?version=5'
-            },
-            path: 'rotation/'
-        }
-
-        const craft = {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'type': 'crafting?version=5'
-            },
-            path: 'rotation/'
-        }
-
-        const news = {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'type': 'news?lang=fr-fr'
-            },
-            path: 'rotation/'
-        }
-        
-        const res_rotation = await FetchData.getapi(rotation.path, rotation.headers)
-        const res_craft = await FetchData.getapi(craft.path, craft.headers)
-        const res_news = await FetchData.getapi(news.path, news.headers)
+        const res_rotation = await FetchData.getapi(this.headers.rotation.path, this.headers.rotation.headers)
+        const res_craft = await FetchData.getapi(this.headers.craft.path, this.headers.craft.headers)
+        const res_news = await FetchData.getapi(this.headers.news.path, this.headers.news.headers)
         this.current = res_rotation.battle_royale.current
         this.next = res_rotation.battle_royale.next
         this.craft = res_craft
         this.news = res_news
         this.loading = false
+
+        this.timer(this)
     }
 }
 </script>
