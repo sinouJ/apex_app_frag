@@ -26,6 +26,18 @@
                 </div>
             </template>
         </card-home>
+        <card-home title="news" class="news_card" :style="loading ? 'loading' : `background-image: url(${news[0].img})`">
+            <template v-slot:main>
+                <div class="content">
+                    <p>{{loading ? 'Loading...' : news[0].short_desc}}</p>
+                    <a v-if="!loading" :href="news[0].link" target="_blank">
+                        <p>Voir plus</p>
+                        <img src="../../assets/icons/on_arrow_right.svg">
+                    </a>
+                </div>
+            </template>
+        </card-home>
+        
     </div>
 </template>
 
@@ -46,9 +58,10 @@ export default {
     data: function() {
         return {
             loading: true,
-            current: {},
-            next: {},
-            craft: {}
+            current: Object,
+            next: Object,
+            craft: Array,
+            news: Array
         }
     },
     async mounted() {
@@ -69,12 +82,23 @@ export default {
             },
             path: 'rotation/'
         }
+
+        const news = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'type': 'news?lang=fr-fr'
+            },
+            path: 'rotation/'
+        }
         
         const res_rotation = await FetchData.getapi(rotation.path, rotation.headers)
         const res_craft = await FetchData.getapi(craft.path, craft.headers)
+        const res_news = await FetchData.getapi(news.path, news.headers)
         this.current = res_rotation.battle_royale.current
         this.next = res_rotation.battle_royale.next
         this.craft = res_craft
+        this.news = res_news
         this.loading = false
     }
 }
@@ -119,6 +143,8 @@ export default {
             }
 
             &.craft_card {
+                margin-bottom: 20px;
+
                 .craft_container {
                     display: flex;
                     justify-content: space-around;
@@ -142,6 +168,47 @@ export default {
                         }
                     }
                 }
+            }
+
+            &.news_card {
+                background-size: cover;
+                background-position: center;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0; right: 0; bottom: 0; left: 0;
+                    background-color: black;
+                    opacity: 0.6;
+                }
+
+                .content {
+                    height: 160px;
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-direction: column;
+
+                    a, p {
+                        position: relative;
+                        z-index: 2;
+                    }
+
+                    p {
+                        color: $light;
+                    }
+
+                    a {
+                        display: flex;
+                        width: 100%;
+                        justify-content: flex-end;
+                        align-items: center;
+
+                        p {
+                            color: $primary_blue;
+                            width: fit-content;
+                        }
+                    }
+                }                
             }
         }
 

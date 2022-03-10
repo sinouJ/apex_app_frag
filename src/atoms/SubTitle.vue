@@ -20,6 +20,8 @@ export default {
         text-transform: uppercase;
         font-size: 20px;
         margin: 0;
+        position: relative;
+        z-index: 2;
 
         &.dark {
             color: $bg_dark;
