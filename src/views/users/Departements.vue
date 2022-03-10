@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <Header title="DEPARTEMENTS"/>
+        <Header title="Board"/>
         <table-departements :data_departements="data_departements" />
     </div>
 </template>
