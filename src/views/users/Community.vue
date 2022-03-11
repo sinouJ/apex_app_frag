@@ -7,7 +7,7 @@
 
 <script>
 import Header from '../../components/Header.vue'
-import CardPlayer from '../../components/CardPlayer.vue'
+import CardPlayer from '../../components/Cards/CardPlayer.vue'
 import {FetchData} from '@/utils/fetch'
 
 export default {
