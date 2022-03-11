@@ -4,7 +4,7 @@ import url from './urlUtils'
 const getUsername = async () => {
     let isAuthenticated = false
     const token = Cookies.get('token')
-    const req_url = url+'user/usernameAuth'
+    const req_url = url()+'user/usernameAuth'
 
     const req = await fetch(req_url, {
         method: 'GET',
