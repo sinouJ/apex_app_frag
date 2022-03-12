@@ -10,7 +10,10 @@
           @update="updateConnexionUsername"
         />
         <input-password id="pwd" label="Password" @update="updatePassword" />
-        <router-link to="/register"> Inscription </router-link>
+        <div class="link">
+            <p>Pas encore de compte ?</p>
+            <router-link to="/register">Inscription</router-link>
+        </div>
       </div>
       <div class="buttonContainer">
         <Button @clicked="validForm" txt="Login" />
@@ -91,12 +94,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../sass/helpers/variables';
 .login {
   height: calc(100vh - 97px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
+
+  form {
+    .checkUsername {
+        .link {
+            overflow: hidden;
+            text-align: center;
+
+            a {
+                width: fit-content;
+                margin: 0 auto;
+                color: $primary_blue;
+            }
+        }
+    }
+
+    .buttonContainer {
+        position: absolute;
+        bottom: 20px + 79px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+
+        .button {
+        color: white;
+        margin: 0 auto;
+        }
+    }
+  }
 
   img {
     position: absolute;
@@ -105,21 +139,6 @@ export default {
     right: 0;
     margin: 0 auto;
     width: 70%;
-  }
-
-  .buttonContainer {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-
-    .button {
-      color: white;
-      margin: 0 auto;
-    }
   }
 }
 </style>

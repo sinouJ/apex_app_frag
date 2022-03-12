@@ -8,6 +8,10 @@
                 label="Enter your Apex username"
                 @update="updateGameUsername"
             />
+            <div class="link">
+                <p>Déjà inscrit ?</p>
+                <router-link to="/login">Connexion</router-link>
+            </div>
         </div>
         <div class="choosePlatform" :class="stepIndex == 1 ? 'active' : null">
             <sub-title title="Select your platform"/>
@@ -251,12 +255,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../sass/helpers/variables';
+
     .register {
         height: calc(100vh - 97px);
         display: flex;
         flex-direction: column;
         justify-content: center;
         position: relative;
+
+        .checkUsername {
+            .link {
+                overflow: hidden;
+                text-align: center;
+
+                a {
+                    width: fit-content;
+                    margin: 0 auto;
+                    color: $primary_blue;
+                }
+            }
+        }
 
         > div {
             &:not(.nextButton) {
