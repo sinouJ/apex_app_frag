@@ -36,6 +36,7 @@ export default {
     nav {
         width: 100%;
         position: fixed;
+        z-index: 999;
         bottom: 0;
         background-color: $dark;
         border-top: 1px solid #636071;
