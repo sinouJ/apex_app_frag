@@ -1,5 +1,5 @@
 <template>
-    <div class="register">
+    <form class="register">
         <vue-notification-list position="top-left"></vue-notification-list>
         <img src="../../assets/logo.png">
         <div class="checkUsername" :class="stepIndex == 0 ? 'active' : null">
@@ -33,7 +33,7 @@
                 label="Username"
             />
             <input-password
-                id="pwd"
+                id="pwd_1"
                 label="Enter a password"
             />
         </div>
@@ -52,7 +52,7 @@
             <Button @clicked="previousStep" txt="Previous"/>
             <Button @clicked="validForm" :disabled="isDisabled" txt="Submit"/>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
