@@ -3,21 +3,17 @@
     <vue-notification-list position="top-left"></vue-notification-list>
     <img src="../../assets/logo.png" />
     <form @submit.prevent="validForm">
-      <div class="checkUsername">
-        <input-text
-          id="checkUsername"
-          label="Username"
-          @update="updateConnexionUsername"
-        />
-        <input-password id="pwd" label="Password" @update="updatePassword" />
-        <div class="link">
-            <p>Pas encore de compte ?</p>
-            <router-link to="/register">Inscription</router-link>
-        </div>
+      <input-text
+        id="checkUsername"
+        label="Username"
+        @update="updateConnexionUsername"
+      />
+      <input-password id="pwd" label="Password" @update="updatePassword" />
+      <div class="link">
+        <p>Pas encore de compte ?</p>
+        <router-link to="/register">Inscription</router-link>
       </div>
-      <div class="buttonContainer">
-        <Button @clicked="validForm" txt="Login" />
-      </div>
+      <Button type="submit" txt="Connexion"></Button>
     </form>
   </div>
 </template>
@@ -94,41 +90,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../sass/helpers/variables';
+@import "../../sass/helpers/variables";
+
+$navbar_height: 79px;
+
 .login {
-  height: calc(100vh - 97px);
+  height: calc(100vh - $navbar_height);
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
 
   form {
-    .checkUsername {
-        .link {
-            overflow: hidden;
-            text-align: center;
+    .link {
+        overflow: hidden;
+        text-align: center;
 
-            a {
-                width: fit-content;
-                margin: 0 auto;
-                color: $primary_blue;
-            }
+        a {
+            width: fit-content;
+            margin: 0 auto;
+            color: $primary_blue;
         }
     }
 
-    .buttonContainer {
-        position: absolute;
-        bottom: 20px + 79px;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-
-        .button {
-        color: white;
-        margin: 0 auto;
-        }
+    .button {
+        display: block;
+        margin: 40px auto 0;
     }
   }
 
