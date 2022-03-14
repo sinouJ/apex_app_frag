@@ -1,44 +1,46 @@
 <template>
-    <div class="container home">
+    <div>
         <Header title="FRAG"/>
-        <card-home :title="current.map" class="map_card" :class="current.code">
-            <template v-slot:main>
-                <div class="map" >
-                    <p><strong>Temps restant :</strong> {{this.current.timer}}</p>
-                </div>
-            </template>
-        </card-home>
-        <p class="next"><strong>Prochaine :</strong> {{next.map}} à {{next.readableDate_start}}</p>
-        <card-home title="Craft rotation" class="craft_card">
-            <template v-slot:main>
-                <div class="craft_container">
-                    <div class="daily">
-                        <h3>Daily</h3>
-                        <img :src="loading ? 'loading' : craft[0].bundleContent[0].itemType.asset">
-                        <img :src="loading ? 'loading' : craft[0].bundleContent[1].itemType.asset">
+        <div class="container home">
+            <card-home :title="current.map" class="map_card" :class="current.code">
+                <template v-slot:main>
+                    <div class="map" >
+                        <p><strong>Temps restant :</strong> {{this.current.timer}}</p>
                     </div>
-                    <span class="divider"></span>
-                    <div class="hebdo">
-                        <h3>Hebdo</h3>
-                        <img :src="loading ? 'loading' : craft[1].bundleContent[0].itemType.asset">
-                        <img :src="loading ? 'loading' : craft[1].bundleContent[1].itemType.asset">
+                </template>
+            </card-home>
+            <p class="next"><strong>Prochaine :</strong> {{next.map}} à {{next.readableDate_start}}</p>
+            <card-home title="Craft rotation" class="craft_card">
+                <template v-slot:main>
+                    <div class="craft_container">
+                        <div class="daily">
+                            <h3>Daily</h3>
+                            <img :src="loading ? 'loading' : craft[0].bundleContent[0].itemType.asset">
+                            <img :src="loading ? 'loading' : craft[0].bundleContent[1].itemType.asset">
+                        </div>
+                        <span class="divider"></span>
+                        <div class="hebdo">
+                            <h3>Hebdo</h3>
+                            <img :src="loading ? 'loading' : craft[1].bundleContent[0].itemType.asset">
+                            <img :src="loading ? 'loading' : craft[1].bundleContent[1].itemType.asset">
+                        </div>
                     </div>
-                </div>
-            </template>
-        </card-home>
-        <card-home title="news" class="news_card" :style="loading ? 'loading' : `background-image: url(${news[0].img})`">
-            <template v-slot:main>
-                <div class="content">
-                    <p>{{loading ? 'Loading...' : news[0].short_desc}}</p>
-                    <a v-if="!loading" :href="news[0].link" target="_blank">
-                        <p>Voir plus</p>
-                        <img src="../../assets/icons/on_arrow_right.svg">
-                    </a>
-                </div>
-            </template>
-        </card-home>
-        
+                </template>
+            </card-home>
+            <card-home title="news" class="news_card" :style="loading ? 'loading' : `background-image: url(${news[0].img})`">
+                <template v-slot:main>
+                    <div class="content">
+                        <p>{{loading ? 'Loading...' : news[0].short_desc}}</p>
+                        <a v-if="!loading" :href="news[0].link" target="_blank">
+                            <p>Voir plus</p>
+                            <img src="../../assets/icons/on_arrow_right.svg">
+                        </a>
+                    </div>
+                </template>
+            </card-home>
+        </div>
     </div>
+    
 </template>
 
 <script>
