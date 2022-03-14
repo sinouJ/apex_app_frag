@@ -1,6 +1,8 @@
 <template>
-  <Navbar v-if="$route.path.includes('/admin') === false"/>
-  <router-view/>
+  <div>
+    <Navbar v-if="$route.path.includes('/admin') === false"/>
+    <router-view/>
+  </div>
 </template>
 
 <script>
@@ -19,5 +21,6 @@ export default {
 <style>
   #app {
     padding-bottom: 85px;
+    padding-top: 95px;
   }
 </style>

@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
+  <div>
     <Header title="Community"/>
-    <card-player v-for="user in users" :key="user.game_username" :game_username="user.game_username"/>
+    <div class="container">
+      <card-player v-for="user in users" :key="user.game_username" :game_username="user.game_username"/>
+    </div>
   </div>
 </template>
 
