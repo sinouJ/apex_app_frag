@@ -55,7 +55,8 @@ const routes = [
     name: 'Register',
     component: Register,
     meta: {
-      isProtected: false
+      isProtected: false,
+      isLogginRoute: true
     }
   },
   {
@@ -63,7 +64,8 @@ const routes = [
     name: 'Login',
     component: Login,
     meta: {
-      isProtected: false
+      isProtected: false,
+      isLogginRoute: true
     }
   },
   {
@@ -111,6 +113,7 @@ router.beforeEach(async(to, from, next) => {
   const res = await checkToken()
 
   if (res === false && to.meta.isProtected) next({name: 'Login'})
+  if (res === true && to.meta.isLogginRoute) next({name: 'Home'})
   else next()
 })
 

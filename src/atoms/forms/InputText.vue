@@ -8,6 +8,9 @@
                 v-bind="$attrs" 
                 :value="inputValue" 
                 @input="inputUpdate($event)"
+                autocomplete="off"
+                readonly
+                onfocus="this.removeAttribute('readonly')"
             >
         </div>
     </div>

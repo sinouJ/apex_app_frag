@@ -1,7 +1,7 @@
 <template>
-  <div class="button" :class="disabled ? 'disable' : null" :type="submit ? 'submit' : null" @click="clicked">
+  <button class="button" :class="disabled ? 'disable' : null" :type="submit ? 'submit' : null" @click="clicked">
       <p> {{txt}} </p>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -28,6 +28,7 @@ export default {
         min-width: 120px;
         width: fit-content;
         padding: 10px 20px;
+        border: 0;
         border-radius: 20px;
 
         &.disable {
@@ -36,6 +37,9 @@ export default {
 
         p {
             text-align: center;
+            color: $light;
+            font-size: 18px;
+            font-family: Roboto;
         }
     }
 </style>

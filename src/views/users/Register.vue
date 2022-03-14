@@ -1,5 +1,5 @@
 <template>
-    <div class="register">
+    <form class="register">
         <vue-notification-list position="top-left"></vue-notification-list>
         <img src="../../assets/logo.png">
         <div class="checkUsername" :class="stepIndex == 0 ? 'active' : null">
@@ -8,6 +8,10 @@
                 label="Enter your Apex username"
                 @update="updateGameUsername"
             />
+            <div class="link">
+                <p>Déjà inscrit ?</p>
+                <router-link to="/login">Connexion</router-link>
+            </div>
         </div>
         <div class="choosePlatform" :class="stepIndex == 1 ? 'active' : null">
             <sub-title title="Select your platform"/>
@@ -29,7 +33,7 @@
                 label="Username"
             />
             <input-password
-                id="pwd"
+                id="pwd_1"
                 label="Enter a password"
             />
         </div>
@@ -48,7 +52,7 @@
             <Button @clicked="previousStep" txt="Previous"/>
             <Button @clicked="validForm" :disabled="isDisabled" txt="Submit"/>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -251,12 +255,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../sass/helpers/variables';
+
     .register {
         height: calc(100vh - 97px);
         display: flex;
         flex-direction: column;
         justify-content: center;
         position: relative;
+
+        .checkUsername {
+            .link {
+                overflow: hidden;
+                text-align: center;
+
+                a {
+                    width: fit-content;
+                    margin: 0 auto;
+                    color: $primary_blue;
+                }
+            }
+        }
 
         > div {
             &:not(.nextButton) {
