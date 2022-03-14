@@ -1,7 +1,9 @@
 <template>
-    <div class="container">
+    <div>
         <Header title="Board"/>
-        <table-departements :data_departements="data_departements" />
+        <div class="container">
+            <table-departements :data_departements="data_departements" />
+        </div>
     </div>
 </template>
 
