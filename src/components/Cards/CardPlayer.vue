@@ -1,42 +1,66 @@
 <template>
-    <div class="card">
+    <router-link class="card" :class="color" :to="`/community/stats/${game_username}`">
         <sub-title :title="game_username"/>
-        <router-link :to="`/community/stats/${game_username}`">
-            <Button txt="See stats"/>
-        </router-link>
-    </div>
+        <span>
+            <img src="../../assets/icons/on_arrow_right_circle.svg">
+        </span>
+    </router-link>
 </template>
 
 <script>
 import SubTitle from '../../atoms/SubTitle.vue'
-import Button from '../../atoms/buttons/Button.vue'
 
 export default {
     name: "CardPlayer",
     components: {
         SubTitle,
-        Button
     },
     props: {
-        game_username: String
+        game_username: String,
+        color: String
     }
 }
 </script>
 
 <style lang="scss" scoped>
-    .card {
-        background-color: #081C72;
-        border-radius: 15px;
-        padding: 15px 5px;
-        box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.49);
-        color: white;
+@import '../../sass/helpers/variables';
 
-        a {
-            width: 100%;
+    .card {
+        border-radius: 15px;
+        padding: 15px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        width: 100%;
+        color: white;
+        
+        &.gray {
+            background-color: $lightgray;
+        }
+        &.blue {
+            background-color: $blue;
+        }
+        &.orange {
+            background-color: $orange;
+        }
+        &.lavender {
+            background-color: $lavender;
+        }
+        &.mint {
+            background-color: $mint;
         }
 
-        .button {
-            margin: 0 auto;
+        span {
+            width: 30px;
+            height: 30px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                margin: 0;
+            }
         }
     }
 </style>

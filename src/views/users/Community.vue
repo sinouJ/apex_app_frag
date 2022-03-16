@@ -2,7 +2,7 @@
   <div>
     <Header title="Community"/>
     <div class="container">
-      <card-player v-for="user in users" :key="user.game_username" :game_username="user.game_username"/>
+      <card-player v-for="user in users" :key="user.game_username" :game_username="user.game_username" :color="cardColorArray[Math.floor(Math.random() * cardColorArray.length)]"/>
     </div>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
   },
   data: function() {
     return {
-      users: []
+      users: [],
+      cardColorArray: ['mint', 'blue', 'gray', 'lavender', 'orange']
     }
   },
   async mounted() {
