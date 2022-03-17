@@ -1,7 +1,7 @@
 <template>
     <div class="loading-container">
         <ping-pong size="80px"/>
-        <p>Loading</p>
+        <p>{{loadingSentenceArray[Math.floor(Math.random() * loadingSentenceArray.length)]}}</p>
     </div>
 </template>
 
@@ -12,6 +12,17 @@ export default {
     name: 'Loader',
     components: {
         PingPong
+    },
+    data: function() {
+        return{
+            loadingSentenceArray: [
+                'Attends Xaero est en train de rouler',
+                'Barbusson construit une maison',
+                'Nouuns est en train de push une team solo',
+                'Xaero est en train de loot',
+                'Dod nous prépare un peu de frobite',
+            ]
+        }
     }
 }
 </script>
