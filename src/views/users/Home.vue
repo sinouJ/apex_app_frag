@@ -1,10 +1,7 @@
 <template>
     <div>
         <Header title="FRAG"/>
-        <div class="loading-container" v-if="loading">
-            <ping-pong size="80px"/>
-            <p>Loading</p>
-        </div>
+        <Loader v-if="loading"/>
         <div v-else class="container home">
             <card-home :title="current.map" class="map_card" :class="current.code">
                 <template v-slot:main>
@@ -56,14 +53,14 @@ import CardHome from '../../components/Cards/CardHome.vue'
 import {FetchData} from '@/utils/fetch'
 
 // External
-import {PingPong} from 'vue-loading-spinner'
+import Loader from '../../components/Loader.vue'
 
 export default {
     name: "Home",
     components: {
         Header,
         CardHome,
-        PingPong
+        Loader
     },
     data: function() {
         return {
@@ -138,19 +135,6 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../sass/helpers/variables';
-
-    .loading-container {
-        height: calc(100vh - 78px - 94px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-
-        .spinner {
-            height: 80px;
-            width: 80px;
-        }
-    }
 
     .home {
         .card {
