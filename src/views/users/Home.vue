@@ -1,8 +1,9 @@
 <template>
     <div>
         <Header title="FRAG"/>
-        <div v-if="loading">
-            loading
+        <div class="loading-container" v-if="loading">
+            <ping-pong size="80px"/>
+            <p>Loading</p>
         </div>
         <div v-else class="container home">
             <card-home :title="current.map" class="map_card" :class="current.code">
@@ -54,11 +55,15 @@ import CardHome from '../../components/Cards/CardHome.vue'
 // Utils
 import {FetchData} from '@/utils/fetch'
 
+// External
+import {PingPong} from 'vue-loading-spinner'
+
 export default {
     name: "Home",
     components: {
         Header,
-        CardHome
+        CardHome,
+        PingPong
     },
     data: function() {
         return {
@@ -124,7 +129,7 @@ export default {
         this.next = res_rotation.battle_royale.next
         this.craft = res_craft
         this.news = res_news
-        this.loading = false
+        // this.loading = false
 
         this.timer(this)
     }
@@ -133,6 +138,19 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../sass/helpers/variables';
+
+    .loading-container {
+        height: calc(100vh - 78px - 94px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .spinner {
+            height: 80px;
+            width: 80px;
+        }
+    }
 
     .home {
         .card {
