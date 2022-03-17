@@ -129,7 +129,7 @@ export default {
         this.next = res_rotation.battle_royale.next
         this.craft = res_craft
         this.news = res_news
-        // this.loading = false
+        this.loading = false
 
         this.timer(this)
     }
