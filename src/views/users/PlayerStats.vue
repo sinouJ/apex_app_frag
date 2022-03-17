@@ -2,7 +2,7 @@
     <div class="playerStats container">
         <Title :title="loading_user ? 'loading...' : player.game_username"/>
         <div v-if="loading_player_data">
-            <p>Loading...</p>
+            <loader/>
         </div>
         <div v-else>
             <p>Platform:{{player_data.global.platform}}</p>
@@ -16,11 +16,13 @@
 
 <script>
 import Title from '../../atoms/Title.vue'
+import Loader from '../../components/Loader.vue'
 
 export default {
     name: 'PlayerStats',
     components: {
-        Title
+        Title,
+        Loader
     },
     data: function() {
         return {
