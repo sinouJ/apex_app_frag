@@ -1,5 +1,5 @@
 <template>
-    <router-link class="card" :class="color" :to="`/community/stats/${game_username}`">
+    <router-link class="card" :class="cardColorArray[Math.floor(Math.random() * cardColorArray.length)]" :to="`/community/stats/${game_username}`">
         <sub-title :title="game_username"/>
         <span>
             <img src="../../assets/icons/on_arrow_right_circle.svg">
@@ -17,7 +17,11 @@ export default {
     },
     props: {
         game_username: String,
-        color: String
+    },
+    data: function() {
+        return{
+            cardColorArray: ['mint', 'blue', 'gray', 'lavender', 'orange']
+        }
     }
 }
 </script>

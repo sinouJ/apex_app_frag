@@ -9,7 +9,7 @@
           </p>
         </template>
       </card-community>
-      <card-player v-for="user in users" :key="user.game_username" :game_username="user.game_username" :color="cardColorArray[Math.floor(Math.random() * cardColorArray.length)]"/>
+      <card-player v-for="user in users" :key="user.game_username" :game_username="user.game_username"/>
     </div>
   </div>
 </template>
@@ -33,7 +33,6 @@ export default {
   data: function() {
     return {
       users: [],
-      cardColorArray: ['mint', 'blue', 'gray', 'lavender', 'orange']
     }
   },
   async mounted() {
