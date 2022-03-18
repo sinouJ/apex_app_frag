@@ -10,30 +10,45 @@
                     <div class="level">
                         <p>
                             <span class="bold">Level</span>
-                            - {{player_data.global.level}}
+                            - {{global.level}}
                         </p>
                         <div class="xp_progression" :style="xpStyle"></div>
                     </div>
                     <div class="rank_container">
                         <div class="rank">
-                            <img :src="player_data.global.rank.rankImg">
+                            <img :src="global.rank.rankImg">
                             <p>
                                 <span class="bold">BR</span>
-                                - {{player_data.global.rank.rankName}} {{player_data.global.rank.rankDiv}}
+                                - {{global.rank.rankName}} {{global.rank.rankDiv}}
                             </p>
-                            <p>{{player_data.global.rank.rankScore}} RP</p>
+                            <p>{{global.rank.rankScore}} RP</p>
                         </div>
                         <div class="arene">
-                            <img :src="player_data.global.arena.rankImg">
+                            <img :src="global.arena.rankImg">
                             <p>
                                 <span class="bold">Arène</span>
-                                - {{player_data.global.arena.rankName}} {{player_data.global.arena.rankDiv}}
+                                - {{global.arena.rankName}} {{global.arena.rankDiv}}
                             </p>
-                            <p>{{player_data.global.arena.rankScore}} RP</p>
+                            <p>{{global.arena.rankScore}} RP</p>
                         </div>
                     </div>
                 </template>
             </card-home>
+            <card-legend-stats :legendImg="require(`../../assets/legends/${selected.LegendName.toLowerCase()}.webp`)" :legendData="selected">
+                <template v-slot:stats>
+                    <div class="card_content">
+                        <div class="name_block">
+                            <sub-title :title="selected.LegendName" :light="false"/>
+                        </div>
+                        <div>
+                            <div class="stat_block" v-for="stat in selected.data" :key="stat.key">
+                                <p>{{stat.name}}</p>
+                                <H3 :title="stat.value.toString()" :light="false"/>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </card-legend-stats>
         </div>
     </div>
 </template>
@@ -46,19 +61,27 @@ import Loader from '../../components/Loader.vue'
 // Utils
 import {FetchData} from '@/utils/fetch.js'
 import CardHome from '../../components/Cards/CardHome.vue'
+import CardLegendStats from '../../components/Cards/CardLegendStats.vue'
+import H3 from '../../atoms/H3.vue'
+import SubTitle from '../../atoms/SubTitle.vue'
 
 export default {
     name: 'PlayerStats',
     components: {
         Loader,
         Header,
-        CardHome
+        CardHome,
+        CardLegendStats,
+        H3,
+        SubTitle
     },
     data: function() {
         return {
             loading: true,
             player: false,
-            player_data: {},
+            global: {},
+            selected: {},
+            all_legends: {},
             params: {
                 player: {
                     path: 'user/username',
@@ -82,7 +105,9 @@ export default {
             'platform': this.player.platform,
             'game_username': this.player.game_username
         })
-        this.player_data = req_stats
+        this.global = req_stats.global
+        this.selected = req_stats.legends.selected
+        this.all_legends = req_stats.legends.all
         this.loading = false
     },
     computed: {
@@ -100,6 +125,8 @@ export default {
 
     .player_stats {
         .card {
+            margin-bottom: 20px;
+
             &.global_stats {
                 color: $dark;
                 background-color: $lightgray;
@@ -145,6 +172,26 @@ export default {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
+                    }
+                }
+            }
+
+            &.legend {
+                .stats_container {
+
+                    .card_content {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        height: 100%;
+                    }
+
+                    .stat_block {
+                        margin-bottom: 30px;
+    
+                        p {
+                            margin-bottom: 10px;
+                        }
                     }
                 }
             }
