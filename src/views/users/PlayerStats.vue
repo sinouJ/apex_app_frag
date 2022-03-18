@@ -49,6 +49,23 @@
                     </div>
                 </template>
             </card-legend-stats>
+            <div v-for="(legend, key) in all_legends" :key="legend.legendName">
+                <card-legend-stats v-if="legend.data && legend.data.length > 0"  :legendImg="require(`../../assets/legends/${key.toLowerCase()}.webp`)" :legendData="selected">
+                    <template v-slot:stats>
+                        <div class="card_content">
+                            <div class="name_block">
+                                <sub-title :title="key" :light="false"/>
+                            </div>
+                            <div>
+                                <div class="stat_block" v-for="stat in legend.data" :key="stat.key">
+                                    <p>{{stat.name}}</p>
+                                    <H3 :title="stat.value.toString()" :light="false"/>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </card-legend-stats>
+            </div>
         </div>
     </div>
 </template>
@@ -57,13 +74,16 @@
 // Components
 import Header from '../../components/Header.vue'
 import Loader from '../../components/Loader.vue'
-
-// Utils
-import {FetchData} from '@/utils/fetch.js'
 import CardHome from '../../components/Cards/CardHome.vue'
 import CardLegendStats from '../../components/Cards/CardLegendStats.vue'
 import H3 from '../../atoms/H3.vue'
 import SubTitle from '../../atoms/SubTitle.vue'
+
+// Utils
+import {FetchData} from '@/utils/fetch.js'
+
+// External
+// import _ from 'lodash'
 
 export default {
     name: 'PlayerStats',
@@ -108,6 +128,9 @@ export default {
         this.global = req_stats.global
         this.selected = req_stats.legends.selected
         this.all_legends = req_stats.legends.all
+        
+        // this.all_legends = _.filter(req_stats.legends.all, (legend) => {return legend})
+
         this.loading = false
     },
     computed: {
