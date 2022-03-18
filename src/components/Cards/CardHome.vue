@@ -24,12 +24,4 @@ export default {
 </script>
 
 <style lang="scss">
-    @import '@/sass/helpers/variables';
-
-    .card {
-        padding: 10px;
-        background-color: $dark;
-        border-radius: 10px;
-        overflow: hidden;
-    }
 </style>
