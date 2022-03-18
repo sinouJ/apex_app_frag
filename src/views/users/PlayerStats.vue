@@ -113,7 +113,7 @@ export default {
     computed: {
         xpStyle() {
             return {
-                '--after-width': `${this.player_data.global.toNextLevelPercent}%`
+                '--after-width': `${this.global.toNextLevelPercent}%`
             }
         }
     }
