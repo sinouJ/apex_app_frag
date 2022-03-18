@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        <Title :title="title"/>
+        <Title :light="light" :title="title"/>
         <router-link to="profile">
             <profile-pic :img="img"></profile-pic>
         </router-link>
@@ -14,7 +14,11 @@ import Title from '../atoms/Title.vue'
 export default {
     name: "Header",
     props: {
-        title: String
+        title: String,
+        light: {
+            type: Boolean,
+            default: false
+        }
     },
     components: {
         ProfilePic,
