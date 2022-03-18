@@ -1,65 +1,58 @@
 <template>
     <div class="playerStats container">
-        <Title :title="loading_user ? 'loading...' : player.game_username"/>
-        <div v-if="loading_player_data">
+        <Header title="Stats"/>
+        <div v-if="loading">
             <loader/>
         </div>
         <div v-else>
-            <p>Platform:{{player_data.global.platform}}</p>
-            <p>Level:{{player_data.global.level}} </p>
-            <p>Rank: {{player_data.global.rank.rankName}}</p>
-            <p>Rank: {{player_data.global.rank.rankDiv}}</p>
-            <p>Rank: {{player_data.global.rank.rankScore}}</p>
         </div>
     </div>
 </template>
 
 <script>
-import Title from '../../atoms/Title.vue'
+// Components
+import Header from '../../components/Header.vue'
 import Loader from '../../components/Loader.vue'
+
+// Utils
+import {FetchData} from '@/utils/fetch.js'
 
 export default {
     name: 'PlayerStats',
     components: {
-        Title,
-        Loader
+        Loader,
+        Header
     },
     data: function() {
         return {
-            loading_user: true,
-            loading_player_data: true,
+            loading: true,
             player: false,
-            player_data: {}
+            player_data: {},
+            params: {
+                player: {
+                    path: 'user/username',
+                    game_username: this.$route.params.game_username
+                },
+                stats: {
+                    path: 'stats'
+                }
+            }
         }
     },
-    async mounted() {
-        const url_user = 'http://localhost:2222/api/user/username'
-        const req_user = await fetch(url_user, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                game_username: this.$route.params.game_username
-            }
+    async mounted({player, stats} = this.params) {
+        const req_user = await FetchData.get(player.path, {
+            'game_username': player.game_username
         })
-        const res_user = await req_user.json()
-        this.player = await res_user
-        this.loading_user = false
-        
-        const url_player_data = 'http://localhost:2222/api/stats'
-        const req_player_data = await fetch(url_player_data, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'game_username': this.player.user_found.game_username,
-                'platform': this.player.user_found.platform
-            }
+        this.player = req_user.user_found
+
+        const req_stats = await FetchData.getapi(stats.path, {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'platform': this.player.platform,
+            'game_username': this.player.game_username
         })
-        const res_player_data = await req_player_data.json()
-        this.player_data = res_player_data
-        this.loading_player_data = false
-        console.log(this.player_data)
+        this.player_data = req_stats
+        this.loading = false
     }
 }
 </script>
