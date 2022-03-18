@@ -1,6 +1,6 @@
 <template>
     <div class="player_stats">
-        <Header title="Stats"/>
+        <header-return title="Stats"/>
         <div v-if="loading">
             <loader/>
         </div>
@@ -72,7 +72,7 @@
 
 <script>
 // Components
-import Header from '../../components/Header.vue'
+import HeaderReturn from '../../components/HeaderReturn.vue'
 import Loader from '../../components/Loader.vue'
 import CardHome from '../../components/Cards/CardHome.vue'
 import CardLegendStats from '../../components/Cards/CardLegendStats.vue'
@@ -89,7 +89,7 @@ export default {
     name: 'PlayerStats',
     components: {
         Loader,
-        Header,
+        HeaderReturn,
         CardHome,
         CardLegendStats,
         H3,
@@ -128,9 +128,6 @@ export default {
         this.global = req_stats.global
         this.selected = req_stats.legends.selected
         this.all_legends = req_stats.legends.all
-        
-        // this.all_legends = _.filter(req_stats.legends.all, (legend) => {return legend})
-
         this.loading = false
     },
     computed: {
