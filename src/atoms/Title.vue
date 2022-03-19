@@ -7,7 +7,10 @@ export default {
   name: "Title",
   props: {
     title: String,
-    light: Boolean
+    light: {
+      type: Boolean,
+      default: false
+    }
   },
 }
 </script>

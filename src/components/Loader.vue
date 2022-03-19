@@ -17,10 +17,12 @@ export default {
         return{
             loadingSentenceArray: [
                 'Attends Xaero est en train de rouler',
-                'Barbusson construit une maison',
-                'Nouuns est en train de push une team solo',
                 'Xaero est en train de loot',
                 'Dod nous prépare un peu de frobite',
+                'JP_FLACO est train de dire bonjour',
+                'Xaero est parti chercher de l\'eau',
+                'Nouuns va chercher sa commande Uber eats',
+                'Attend que storm point sorte de la rota',
             ]
         }
     }

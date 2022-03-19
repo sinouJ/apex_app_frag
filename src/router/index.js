@@ -17,6 +17,9 @@ import AdminHome from '../views/admin/Home'
 import TableUsers from '../components/Table/TableUsers'
 import TableAuthUsers from '../components/Table/TableAuthUsers'
 
+// Errors
+import Page404 from '../views/errors/Page404.vue'
+
 const routes = [
   {
     path: '/',
@@ -99,7 +102,12 @@ const routes = [
         name: 'Users',
         component: TableUsers
       }
-    ]
+    ],
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: '404',
+    component: Page404
   }
 ]
 
