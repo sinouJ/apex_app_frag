@@ -1,5 +1,5 @@
 <template>
-    <router-link class="card" :class="cardColorArray[Math.floor(Math.random() * cardColorArray.length)]" :to="`/community/stats/${game_username}`">
+    <router-link class="card player" :class="cardColorArray[Math.floor(Math.random() * cardColorArray.length)]" :to="`/community/stats/${game_username}`">
         <sub-title :title="game_username"/>
         <span>
             <img src="../../assets/icons/on_arrow_right_circle.svg">

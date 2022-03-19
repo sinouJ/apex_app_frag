@@ -54,4 +54,10 @@ export default {
     margin-bottom: 20px;
     color: $light;
   }
+
+  .card {
+    &.player {
+      margin-bottom: 10px;
+    }
+  }
 </style>
