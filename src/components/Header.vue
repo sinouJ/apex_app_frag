@@ -14,16 +14,15 @@ import Title from '../atoms/Title.vue'
 export default {
     name: "Header",
     props: {
-        title: String
+        title: String,
+        img: {
+            type: String,
+            default: require('@/assets/icons/white_profile.svg')
+        }
     },
     components: {
         ProfilePic,
         Title
-    },
-    data: function() {
-        return {
-            img: 'https://avatarfiles.alphacoders.com/101/101269.jpg'
-        }
     }
 }
 </script>
@@ -43,5 +42,11 @@ export default {
         width: 100%;
         box-sizing: border-box;
         padding: 0 2.5%;
+
+        .profilePic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 </style>
