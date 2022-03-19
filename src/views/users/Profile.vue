@@ -4,6 +4,7 @@
         <router-link v-if="!loading ? user.user_found.roles.includes('ROLE_ADMIN') : null" to="/admin">Admin</router-link>
         <div class="coming">
             <h2>Coming soon</h2>
+            <Button @clicked="logout" txt="Déconnexion"/>
         </div>
     </div>
 </template>
@@ -11,6 +12,7 @@
 <script>
 // Components
 import Header from '../../components/Header.vue'
+import Button from '../../atoms/buttons/Button.vue'
 
 // Utils
 import {FetchData} from '@/utils/fetch'
@@ -19,7 +21,8 @@ import cookies from 'js-cookie'
 export default {
     name: "Profile",
     components: {
-        Header
+        Header,
+        Button
     },
     data: function() {
         return {
@@ -36,15 +39,26 @@ export default {
         })
         this.user = req
         this.loading = false
+    },
+    methods: {
+        logout: function() {
+            cookies.set('token', '')
+            this.$router.push('/login')
+        }
     }
 }
 </script>
 
-<style>
+<style lang="scss">
     .coming {
         height: 60vh;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
+
+        h2 {
+            margin-bottom: 10px;
+        }
     }
 </style>
