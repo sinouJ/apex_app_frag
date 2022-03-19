@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <sub-title :title="title" :light="true"/>
+        <sub-title :title="title" :light="light"/>
         <slot name="main"></slot>
     </div>
 </template>
@@ -14,18 +14,14 @@ export default {
         SubTitle
     },
     props: {
-        title: String
+        title: String,
+        light: {
+            type: Boolean,
+            default: true
+        }
     }
 }
 </script>
 
 <style lang="scss">
-    @import '@/sass/helpers/variables';
-
-    .card {
-        padding: 10px;
-        background-color: $dark;
-        border-radius: 10px;
-        overflow: hidden;
-    }
 </style>
