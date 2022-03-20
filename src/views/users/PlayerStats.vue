@@ -34,7 +34,7 @@
                     </div>
                 </template>
             </card-home>
-            <card-legend-stats :legendImg="require(`../../assets/legends/${selected.LegendName.toLowerCase()}.webp`)" :legendData="selected">
+            <card-legend-stats :legendImg="require(`../../assets/legends/${selected.LegendName.toLowerCase().split(' ')[0]}.webp`)" :legendData="selected">
                 <template v-slot:stats>
                     <div class="card_content">
                         <div class="name_block">
@@ -50,7 +50,7 @@
                 </template>
             </card-legend-stats>
             <div v-for="(legend, key) in all_legends" :key="legend.legendName">
-                <card-legend-stats v-if="legend.data && legend.data.length > 0"  :legendImg="require(`../../assets/legends/${key.toLowerCase()}.webp`)" :legendData="selected">
+                <card-legend-stats v-if="legend.data && legend.data.length > 0"  :legendImg="require(`../../assets/legends/${key.toLowerCase().split(' ')[0]}.webp`)" :legendData="selected">
                     <template v-slot:stats>
                         <div class="card_content">
                             <div class="name_block">
