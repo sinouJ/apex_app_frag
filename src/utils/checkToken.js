@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 import url from './urlUtils'
 
-const getUsername = async () => {
+const isAuthenticated = async () => {
     let isAuthenticated = false
     const token = Cookies.get('token')
     const req_url = url()+'user/usernameAuth'
@@ -46,7 +46,7 @@ const isAdmin = async () => {
 
 
 const checkToken = {
-    getUsername, isAdmin
+    isAdmin, isAuthenticated
 }
 
 export { checkToken }
