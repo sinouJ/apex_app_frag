@@ -98,24 +98,43 @@ export default {
         }
     },
     methods: {
-        timer: function(self) {
-            let remainingSecs = this.current.remainingSecs
-            setInterval(async function(){
-                if (remainingSecs > 0) {
-                    remainingSecs--
-                    var hours = Math.floor(remainingSecs / 3600);
-                    remainingSecs = remainingSecs - hours * 3600;
-                    let minutes = Math.floor(remainingSecs / 60);
-                    let seconds = Math.floor(remainingSecs - minutes * 60)
-                    self.current.timer = `0${hours}:${minutes < 10 ? '0'+minutes : minutes}:${seconds < 10 ? '0'+seconds : seconds}`
+        timer: function (self) {
+            let timer
+            let hours
+            let minutes
+            let seconds
+
+            const getTimeRemaining = (dateEnd) => {
+                const t = Date.parse(new Date(dateEnd)) - Date.parse(new Date()) 
+                
+                return {
+                    total: t,
+                    hours: Math.floor((t / (1000 * 60 * 60)) % 24),
+                    minutes: Math.floor((t / 1000 / 60) % 60),
+                    seconds: Math.floor((t / 1000) % 60),
+                };
+            }
+            
+            const updateTimer = function() {
+                const t = getTimeRemaining(self.current.readableDate_end)
+            
+                hours = t.hours
+                minutes = t.minutes
+                seconds = t.seconds
+            
+                hours = hours < 10 ? `0${hours}` : hours
+                minutes = minutes < 10 ? `0${minutes}` : minutes
+                seconds = seconds < 10 ? `0${seconds}` : seconds
+            
+                if (t.total <= 0) {
+                    clearInterval(timer)
                 }
-                else {
-                    const res_rotation = await FetchData.getapi(self.headers.rotation.path, self.headers.rotation.headers)
-                    this.current = res_rotation.battle_royale.current
-                    this.next = res_rotation.battle_royale.next
-                    remainingSecs = self.current.remainingSecs
-                }
-            },1000)
+
+                self.current.timer = `${hours} : ${minutes} : ${seconds}`
+            };
+            
+            updateTimer()
+            setInterval(updateTimer, 1000)
         }
     },
     async mounted() {
