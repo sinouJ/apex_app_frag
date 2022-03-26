@@ -3,6 +3,7 @@
         <Header title="FRAG"/>
         <Loader v-if="loading"/>
         <div v-else class="container home">
+            <p class="welcome_line">Bonjour, {{username}}</p>
             <card-home :title="current.map" class="map_card" :class="current.code">
                 <template v-slot:main>
                     <div class="map" >
@@ -48,12 +49,13 @@
 // Components
 import Header from '../../components/Header.vue'
 import CardHome from '../../components/Cards/CardHome.vue'
+import Loader from '../../components/Loader.vue'
 
 // Utils
 import {FetchData} from '@/utils/fetch'
 
 // External
-import Loader from '../../components/Loader.vue'
+import Cookies from 'js-cookie'
 
 export default {
     name: "Home",
@@ -94,7 +96,8 @@ export default {
             current: Object,
             next: Object,
             craft: Array,
-            news: Array
+            news: Array,
+            username: String
         }
     },
     methods: {
@@ -119,6 +122,8 @@ export default {
         }
     },
     async mounted() {
+
+        // Api externe
         const res_rotation = await FetchData.getapi(this.headers.rotation.path, this.headers.rotation.headers)
         const res_craft = await FetchData.getapi(this.headers.craft.path, this.headers.craft.headers)
         const res_news = await FetchData.getapi(this.headers.news.path, this.headers.news.headers)
@@ -126,8 +131,15 @@ export default {
         this.next = res_rotation.battle_royale.next
         this.craft = res_craft
         this.news = res_news
-        this.loading = false
 
+        // User
+        const token = Cookies.get('token')
+        const res_user = await FetchData.getapi('user/usernameAuth', {
+            authorization: token
+        })
+        this.username = res_user.user_found.game_username
+
+        this.loading = false
         this.timer(this)
     }
 }
@@ -137,6 +149,12 @@ export default {
     @import '../../sass/helpers/variables';
 
     .home {
+        .welcome_line {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
         .card {
             position: relative;
             min-height: 160px;
