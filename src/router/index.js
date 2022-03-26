@@ -91,8 +91,9 @@ const routes = [
 
       const res = await checkToken.isAdmin()
 
-      if (to.path === '/admin' && res) next({name: 'UserAuth'})
-      else next({name: 'Home'})
+      if (to.path === '/admin' && res === true) next({name: 'UserAuth'})
+      if (to.path === '/admin' && !res) next({name: 'Home'})
+      else next()
     },
     children: [
       {
