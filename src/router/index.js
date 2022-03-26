@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { checkToken } from '../utils/checkToken'
 
 // User views
 import Home from '../views/users/Home.vue'
 import Community from '../views/users/Community.vue'
 import Register from '../views/users/Register'
 import Login from '../views/users/Login'
-import checkToken from '../utils/checkToken'
 import PlayerStats from '../views/users/PlayerStats.vue'
 import Profile from '../views/users/Profile'
 import Departements from '../views/users/Departements'
@@ -87,9 +87,12 @@ const routes = [
       isProtected: true,
       isAdmin: true
     },
-    beforeEnter: (to, from, next) => {
-      if (to.path === '/admin') next({name: 'UserAuth'})
-      else next()
+    beforeEnter: async (to, from, next) => {
+
+      const res = await checkToken.isAdmin()
+
+      if (to.path === '/admin' && res) next({name: 'UserAuth'})
+      else next({name: 'Home'})
     },
     children: [
       {
@@ -118,7 +121,7 @@ const router = createRouter({
 
 router.beforeEach(async(to, from, next) => {
   
-  const res = await checkToken()
+  const res = await checkToken.isAuthenticated()
 
   if (res === false && to.meta.isProtected) next({name: 'Login'})
   if (res === true && to.meta.isLogginRoute) next({name: 'Home'})
