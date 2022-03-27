@@ -26,10 +26,12 @@ export default {
     @import '../sass/main';
 
     .tab {
+        margin-bottom: 30px;
+        
         ul {
             justify-content: flex-start;
             overflow-y: scroll;
-            margin-bottom: 30px;
+            margin: 0;
             border-bottom: 1px solid $lightgray;
 
             li {
