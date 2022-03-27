@@ -6,11 +6,11 @@
             <card-home :title="current.map" class="map_card" :class="current.code">
                 <template v-slot:main>
                     <div class="map" >
-                        <p><strong>Temps restant :</strong> {{this.current.timer}}</p>
+                        <p><strong>Temps restant :</strong> {{current.timer}}</p>
                     </div>
                 </template>
             </card-home>
-            <p class="next"><strong>Prochaine :</strong> {{next.map}} à {{next.readableDate_start}}</p>
+            <p class="next"><strong>Prochaine :</strong> {{next.map}} à {{next.nextMapDate}}</p>
             <card-home title="Craft rotation" class="craft_card">
                 <template v-slot:main>
                     <div class="craft_container">
@@ -54,6 +54,13 @@ import {FetchData} from '@/utils/fetch'
 
 // External
 import Loader from '../../components/Loader.vue'
+
+// dayjs
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 export default {
     name: "Home",
@@ -105,7 +112,7 @@ export default {
             let seconds
 
             const getTimeRemaining = (dateEnd) => {
-                const t = Date.parse(new Date(dateEnd)) - Date.parse(new Date()) 
+                const t = Date.parse(dayjs(dateEnd).utc(true)) - Date.parse(dayjs().utc()) 
                 
                 return {
                     total: t,
@@ -130,7 +137,7 @@ export default {
                     clearInterval(timer)
                 }
 
-                self.current.timer = `${hours} : ${minutes} : ${seconds}`
+                self.current.timer = `${hours}:${minutes}:${seconds}`
             };
             
             updateTimer()
@@ -138,6 +145,7 @@ export default {
         }
     },
     async mounted() {
+        // Fetch data api
         const res_rotation = await FetchData.getapi(this.headers.rotation.path, this.headers.rotation.headers)
         const res_craft = await FetchData.getapi(this.headers.craft.path, this.headers.craft.headers)
         const res_news = await FetchData.getapi(this.headers.news.path, this.headers.news.headers)
@@ -145,8 +153,15 @@ export default {
         this.next = res_rotation.battle_royale.next
         this.craft = res_craft
         this.news = res_news
-        this.loading = false
 
+        // Convert date
+        const nextMapDate = dayjs(this.next.readableDate_start).utc(true)
+        const hours = nextMapDate.$d.getHours() < 10 ? `0'${nextMapDate.$d.getHours()}` : nextMapDate.$d.getHours()
+        const minutes = nextMapDate.$d.getMinutes() < 10 ? `0'${nextMapDate.$d.getMinutes()}` : nextMapDate.$d.getMinutes()
+        this.next.nextMapDate = `${hours}:${minutes}:00`
+
+        // init
+        this.loading = false
         this.timer(this)
     }
 }
