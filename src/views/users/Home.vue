@@ -156,8 +156,8 @@ export default {
 
         // Convert date
         const nextMapDate = dayjs(this.next.readableDate_start).utc(true)
-        const hours = nextMapDate.$d.getHours() < 10 ? `0'${nextMapDate.$d.getHours()}` : nextMapDate.$d.getHours()
-        const minutes = nextMapDate.$d.getMinutes() < 10 ? `0'${nextMapDate.$d.getMinutes()}` : nextMapDate.$d.getMinutes()
+        const hours = nextMapDate.$d.getHours() < 10 ? `0${nextMapDate.$d.getHours()}` : nextMapDate.$d.getHours()
+        const minutes = nextMapDate.$d.getMinutes() < 10 ? `0${nextMapDate.$d.getMinutes()}` : nextMapDate.$d.getMinutes()
         this.next.nextMapDate = `${hours}:${minutes}:00`
 
         // init
