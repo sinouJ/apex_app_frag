@@ -15,8 +15,8 @@ const actions = {
     CREATE_FEATURE: async ({ commit }) => {
         commit('postFeature', await features.postFeature(state))
     },
-    DELETE_FEATURE: async({ commit }) => {
-        commit('deleteFeature', await features.deleteFeature(state))
+    DELETE_FEATURE: async({ commit }, id) => {
+        commit('deleteFeature', id)
     },
     UPDATE_FEATURE: async ({ commit }) => {
         commit('putFeature', await features.putFeature(state))
@@ -30,8 +30,9 @@ const mutations = {
     postFeature(state, payload) {
         state.features.push(payload)
     },
-    deleteFeature(state, payload) {
-        state.features = state.features.filter(feature => feature.id !== payload)
+    deleteFeature: async (state, id) => {
+        await features.deleteFeature(id)
+        state.features = state.features.filter(feature => feature.id !== id)
     },
     putFeature(state, payload) {
         const index = state.features.findIndex(feature => feature.id === payload.id)

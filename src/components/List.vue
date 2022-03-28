@@ -31,10 +31,7 @@ export default {
             });
         },
         deleteFeature: function(id) {
-            // this.$store.dispatch('deleteFeature', feature.id);
-            this.features = this.features.filter( feature => {
-                return feature.id !== id;
-            });
+            this.$store.dispatch('features/DELETE_FEATURE', id);
         }
     },
     computed: {
