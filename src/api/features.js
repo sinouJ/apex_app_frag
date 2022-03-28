@@ -1,5 +1,8 @@
+import { FetchData } from '../utils/fetch';
+
 export default {
-    getFeatures: (req, res) => {
-        
+    getFeatures: async () => {
+        const res = await FetchData.get('features');
+        return res;
     }
 }

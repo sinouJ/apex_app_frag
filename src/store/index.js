@@ -1,12 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
+import { createStore } from 'vuex'
 
 // modules
 import features from './modules/features'
 
-export default new Vuex.Store({
+export default createStore({
     modules: {
         features
     }
