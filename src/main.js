@@ -7,4 +7,12 @@ import store from './store'
 import VueNotificationList from '@dafcoe/vue-notification'
 import '@dafcoe/vue-notification/dist/vue-notification.css'
 
-createApp(App).use(router).use(store).use(VueNotificationList).mount('#app')
+// Forms
+import { plugin, defaultConfig } from '@formkit/vue'
+
+createApp(App)
+    .use(router)
+    .use(store)
+    .use(VueNotificationList)
+    .use(plugin, defaultConfig)
+    .mount('#app')
