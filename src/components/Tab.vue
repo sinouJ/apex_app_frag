@@ -26,8 +26,13 @@ export default {
     @import '../sass/main';
 
     .tab {
+        margin-bottom: 30px;
+        
         ul {
-            justify-content: center;
+            justify-content: flex-start;
+            overflow-y: scroll;
+            margin: 0;
+            border-bottom: 1px solid $lightgray;
 
             li {
                 &:not(first-child) {
@@ -35,15 +40,16 @@ export default {
                 }
 
                 a {
-                    width: 100%;
+                    width: max-content;
                     background: transparent;
                     padding: 5px 10px;
                     text-align: center;
-                    border: 1px solid transparent;
+                    border-bottom: 2px solid transparent;
                     box-sizing: border-box;
 
                     &.router-link-active {
-                        border-color: $primary_pink;
+                        border: 0;
+                        border-bottom: 2px solid $primary_blue;
                     }
                 }
             }

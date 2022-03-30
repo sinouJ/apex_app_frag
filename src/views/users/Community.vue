@@ -3,11 +3,14 @@
     <Header title="Community"/>
     <loader v-if="loading"/>
     <div v-else class="container">
-      <card-community title="Annonce">
+      <card-community title="What's new ?">
         <template v-slot:main>
-          <p>
-            Coming soon
-          </p>
+          <ul>
+            <li v-for="feature in features" :key="feature.id">
+              <span class="bullet_point"></span>
+              <p>{{ feature.message }}</p>
+            </li>
+          </ul>
         </template>
       </card-community>
       <card-player v-for="user in users" :key="user.game_username" :game_username="user.game_username"/>
@@ -25,6 +28,9 @@ import CardCommunity from '../../components/Cards/CardCommunity.vue'
 import {FetchData} from '@/utils/fetch'
 import Loader from '../../components/Loader.vue'
 
+// Store
+import { mapGetters, useStore } from 'vuex'
+
 export default {
   name: "Community",
   components: {
@@ -38,6 +44,15 @@ export default {
       users: [],
       loading: true
     }
+  },
+  computed: {
+    ...mapGetters('features', {
+      features: 'features'
+    })
+  },
+  setup() {
+    const store = useStore()
+    store.dispatch('features/GET_FEATURES')
   },
   async mounted() {
     const res = await FetchData.get("user/all")
@@ -53,6 +68,29 @@ export default {
   .cardCommunity {
     margin-bottom: 20px;
     color: $light;
+
+    ul {
+      flex-direction: column;
+
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        span {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: $light;
+          margin-right: 10px;
+        }
+
+        p {
+          flex: 1;
+        }
+       
+      }
+    }
   }
 
   .card {
