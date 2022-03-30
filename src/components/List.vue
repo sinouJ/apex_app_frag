@@ -1,5 +1,8 @@
 <template>
     <div class="list">
+        <FormKit type="form" submit-label="Ajouter" @submit="addFeature">
+            <FormKit type="text" placeholder="Feature" v-model="handleContent"/>
+        </FormKit>
         <ul>
             <li v-for="feature in features" :key="feature.id">
                 <p>{{ feature.message }}</p>
@@ -21,7 +24,17 @@ import { mapGetters, useStore } from 'vuex'
 
 export default {
     name: 'List',
+    data: function () {
+        return {
+            handleContent: '',
+        }
+    },
     methods: {
+        addFeature: function (payload) {
+            console.log('addFeature', this.contentText)
+            this.$store.dispatch('features/CREATE_FEATURE', payload)
+            this.handleContent = ''
+        },
         editFeature: function(feature) {
             this.$router.push({
                 name: 'AdminEditFeature',
@@ -32,6 +45,11 @@ export default {
         },
         deleteFeature: function(id) {
             this.$store.dispatch('features/DELETE_FEATURE', id);
+        }
+    },
+    watch: {
+        handleContent: function(e) {
+            this.$store.dispatch('features/STORE_CONTENT', e);
         }
     },
     computed: {

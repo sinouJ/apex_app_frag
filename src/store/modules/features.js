@@ -1,7 +1,8 @@
 import features from '../../api/features'
 
 const state = {
-    features: [],
+    content: String,
+    features: Array,
 }
 
 const getters = {
@@ -13,13 +14,17 @@ const actions = {
         commit('getFeatures', await features.getFeatures(state))
     },
     CREATE_FEATURE: async ({ commit }) => {
-        commit('postFeature', await features.postFeature(state))
+        commit('postFeature')
+        commit('resetStore')
     },
     DELETE_FEATURE: async({ commit }, id) => {
         commit('deleteFeature', id)
     },
     UPDATE_FEATURE: async ({ commit }) => {
         commit('putFeature', await features.putFeature(state))
+    },
+    STORE_CONTENT: async ({ commit }, payload) => {
+        commit('storeContent', payload)
     }
 }
 
@@ -27,8 +32,9 @@ const mutations = {
     getFeatures(state, payload) {
         state.features = payload
     },
-    postFeature(state, payload) {
-        state.features.push(payload)
+    postFeature: async (state) => {
+        const newFeature = await features.postFeature(state.content)
+        state.features.push(newFeature)
     },
     deleteFeature: async (state, id) => {
         await features.deleteFeature(id)
@@ -37,6 +43,12 @@ const mutations = {
     putFeature(state, payload) {
         const index = state.features.findIndex(feature => feature.id === payload.id)
         state.features.splice(index, 1, payload)
+    },
+    storeContent(state, payload) {
+        state.content = payload
+    },
+    resetStore(state) {
+        state.content = ''
     }
 }
 

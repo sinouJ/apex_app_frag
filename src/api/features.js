@@ -10,5 +10,11 @@ export default {
             id
         });
         return res;
+    },
+    postFeature: async (message) => {
+        const res = await FetchData.post('features', {
+            message
+        });
+        return res;
     }
 }
