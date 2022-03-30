@@ -16,6 +16,7 @@ import AdminHome from '../views/admin/Home'
 // Admin components
 import TableUsers from '../components/Table/TableUsers'
 import TableAuthUsers from '../components/Table/TableAuthUsers'
+import List from '../components/List'
 
 // Errors
 import Page404 from '../views/errors/Page404.vue'
@@ -105,6 +106,11 @@ const routes = [
         path: 'users',
         name: 'Users',
         component: TableUsers
+      },
+      {
+        path: 'features',
+        name: 'Features',
+        component: List 
       }
     ],
   },

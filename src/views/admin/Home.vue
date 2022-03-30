@@ -31,6 +31,11 @@ export default {
                     id: 'registeredUsers',
                     name: 'Users',
                     path: '/users'
+                },
+                {
+                    id: 'features',
+                    name: 'Features',
+                    path: '/features'
                 }
             ]
         }
