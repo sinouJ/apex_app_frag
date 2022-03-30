@@ -7,11 +7,11 @@
             <card-home :title="current.map" class="map_card" :class="current.code">
                 <template v-slot:main>
                     <div class="map" >
-                        <p><strong>Temps restant :</strong> {{this.current.timer}}</p>
+                        <p><strong>Temps restant :</strong> {{current.timer}}</p>
                     </div>
                 </template>
             </card-home>
-            <p class="next"><strong>Prochaine :</strong> {{next.map}} à {{next.readableDate_start}}</p>
+            <p class="next"><strong>Prochaine :</strong> {{next.map}} à {{next.nextMapDate}}</p>
             <card-home title="Craft rotation" class="craft_card">
                 <template v-slot:main>
                     <div class="craft_container">
@@ -57,6 +57,13 @@ import {FetchData} from '@/utils/fetch'
 // External
 import Cookies from 'js-cookie'
 
+// dayjs
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
 export default {
     name: "Home",
     components: {
@@ -101,29 +108,47 @@ export default {
         }
     },
     methods: {
-        timer: function(self) {
-            let remainingSecs = this.current.remainingSecs
-            setInterval(async function(){
-                if (remainingSecs > 0) {
-                    remainingSecs--
-                    var hours = Math.floor(remainingSecs / 3600);
-                    remainingSecs = remainingSecs - hours * 3600;
-                    let minutes = Math.floor(remainingSecs / 60);
-                    let seconds = Math.floor(remainingSecs - minutes * 60)
-                    self.current.timer = `0${hours}:${minutes < 10 ? '0'+minutes : minutes}:${seconds < 10 ? '0'+seconds : seconds}`
+        timer: function (self) {
+            let timer
+            let hours
+            let minutes
+            let seconds
+
+            const getTimeRemaining = (dateEnd) => {
+                const t = Date.parse(dayjs(dateEnd).utc(true)) - Date.parse(dayjs().utc()) 
+                
+                return {
+                    total: t,
+                    hours: Math.floor((t / (1000 * 60 * 60)) % 24),
+                    minutes: Math.floor((t / 1000 / 60) % 60),
+                    seconds: Math.floor((t / 1000) % 60),
+                };
+            }
+            
+            const updateTimer = function() {
+                const t = getTimeRemaining(self.current.readableDate_end)
+            
+                hours = t.hours
+                minutes = t.minutes
+                seconds = t.seconds
+            
+                hours = hours < 10 ? `0${hours}` : hours
+                minutes = minutes < 10 ? `0${minutes}` : minutes
+                seconds = seconds < 10 ? `0${seconds}` : seconds
+            
+                if (t.total <= 0) {
+                    clearInterval(timer)
                 }
-                else {
-                    const res_rotation = await FetchData.getapi(self.headers.rotation.path, self.headers.rotation.headers)
-                    this.current = res_rotation.battle_royale.current
-                    this.next = res_rotation.battle_royale.next
-                    remainingSecs = self.current.remainingSecs
-                }
-            },1000)
+
+                self.current.timer = `${hours}:${minutes}:${seconds}`
+            };
+            
+            updateTimer()
+            setInterval(updateTimer, 1000)
         }
     },
     async mounted() {
-
-        // Api externe
+        // Fetch data api
         const res_rotation = await FetchData.getapi(this.headers.rotation.path, this.headers.rotation.headers)
         const res_craft = await FetchData.getapi(this.headers.craft.path, this.headers.craft.headers)
         const res_news = await FetchData.getapi(this.headers.news.path, this.headers.news.headers)
@@ -139,6 +164,13 @@ export default {
         })
         this.username = res_user.user_found.game_username
 
+        // Convert date
+        const nextMapDate = dayjs(this.next.readableDate_start).utc(true)
+        const hours = nextMapDate.$d.getHours() < 10 ? `0${nextMapDate.$d.getHours()}` : nextMapDate.$d.getHours()
+        const minutes = nextMapDate.$d.getMinutes() < 10 ? `0${nextMapDate.$d.getMinutes()}` : nextMapDate.$d.getMinutes()
+        this.next.nextMapDate = `${hours}:${minutes}:00`
+
+        // init
         this.loading = false
         this.timer(this)
     }
