@@ -10,6 +10,9 @@ import '@dafcoe/vue-notification/dist/vue-notification.css'
 // Forms
 import { plugin, defaultConfig } from '@formkit/vue'
 
+// Styles
+import '@formkit/themes/dist/genesis/theme.css'
+
 createApp(App)
     .use(router)
     .use(store)

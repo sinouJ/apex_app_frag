@@ -1,7 +1,7 @@
 <template>
     <div class="list">
-        <FormKit type="form" submit-label="Ajouter" @submit="addFeature">
-            <FormKit type="text" placeholder="Feature" v-model="handleContent"/>
+        <FormKit class="form_feature" type="form" submit-label="Ajouter" outer-class="form_feature" @submit="addFeature">
+            <FormKit type="textarea" placeholder="Feature" v-model="handleContent"/>
         </FormKit>
         <ul>
             <li v-for="feature in features" :key="feature.id">
@@ -68,6 +68,15 @@ export default {
     @import '../sass/helpers/variables';
 
     .list {
+
+        .formkit-outer[data-type="submit"] {
+            margin-bottom: 50px;
+            text-align: right;
+
+            button {
+                margin-right: 0;
+            }
+        }
         
         ul {
             display: flex;
