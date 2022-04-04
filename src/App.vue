@@ -22,5 +22,6 @@ export default {
   #app {
     padding-bottom: 85px;
     padding-top: 95px;
+    min-height: 100vh;
   }
 </style>
