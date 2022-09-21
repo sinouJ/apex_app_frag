@@ -79,7 +79,7 @@ export default {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'type': 'maprotation?version=5'
+                        'type': 'maprotation'
                     },
                     path: 'rotation/'
                 },
@@ -87,17 +87,17 @@ export default {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'type': 'crafting?version=5'
+                        'type': 'crafting'
                     },
-                    path: 'rotation/'
+                    path: 'craft/'
                 },
                 news: {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'type': 'news?lang=fr-fr'
+                        'type': 'news'
                     },
-                    path: 'rotation/'
+                    path: 'news/'
                 }
             },
             current: Object,
@@ -152,10 +152,12 @@ export default {
         const res_rotation = await FetchData.getapi(this.headers.rotation.path, this.headers.rotation.headers)
         const res_craft = await FetchData.getapi(this.headers.craft.path, this.headers.craft.headers)
         const res_news = await FetchData.getapi(this.headers.news.path, this.headers.news.headers)
-        this.current = res_rotation.battle_royale.current
-        this.next = res_rotation.battle_royale.next
-        this.craft = res_craft
-        this.news = res_news
+        this.current = res_rotation.content.current
+        this.next = res_rotation.content.next
+        this.craft = res_craft.content
+        this.news = res_news.content
+
+        console.log(res_rotation)
 
         // User
         const token = Cookies.get('token')
@@ -203,6 +205,10 @@ export default {
 
             &.kings_canyon_rotation {
                 background-image: url('https://apexlegendsstatus.com/assets/maps/Kings_Canyon.png');
+            }
+
+            &.worlds_edge_rotation {
+                background-image: url('https://apexlegendsstatus.com/assets/maps/Worlds_Edge.png');
             }
 
             &.map_card {
