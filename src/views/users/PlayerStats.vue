@@ -34,7 +34,7 @@
                     </div>
                 </template>
             </card-home>
-            <card-legend-stats :legendImg="require(`../../assets/legends/${selected.LegendName.toLowerCase().split(' ')[0]}.webp`)" :legendData="selected">
+            <card-legend-stats v-if="selected !== false" :legendImg="require(`../../assets/legends/${selected.LegendName.toLowerCase().split(' ')[0]}.webp`)" :legendData="selected">
                 <template v-slot:stats>
                     <div class="card_content">
                         <div class="name_block">
@@ -126,8 +126,8 @@ export default {
             'game_username': this.player.game_username
         })
         this.global = req_stats.global
-        this.selected = req_stats.legends.selected
-        this.all_legends = req_stats.legends.all
+        this.selected = req_stats.legends ? req_stats.legends.selected : false
+        this.all_legends = req_stats.legends ? req_stats.legends.all : false
         this.loading = false
     },
     computed: {
