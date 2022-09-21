@@ -15,9 +15,9 @@
                 </router-link>
             </li>
             <li>
-                <router-link to="/departements">
-                    <img class="active" src="../assets/icons/on_paper.svg">
-                    <img class="inactive" src="../assets/icons/off_paper.svg">
+                <router-link to="/games">
+                    <img class="active" src="../assets/icons/on_play.svg">
+                    <img class="inactive" src="../assets/icons/off_play.svg">
                 </router-link>
             </li>
           </ul>

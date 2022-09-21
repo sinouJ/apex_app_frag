@@ -9,6 +9,8 @@ import Login from '../views/users/Login'
 import PlayerStats from '../views/users/PlayerStats.vue'
 import Profile from '../views/users/Profile'
 import Departements from '../views/users/Departements'
+import Games from '../views/users/Games'
+import Game from '../views/users/Game'
 
 // Admin views
 import AdminHome from '../views/admin/Home'
@@ -50,6 +52,22 @@ const routes = [
     path: '/departements',
     name: 'Departements',
     component: Departements,
+    meta: {
+      isProtected: true
+    }
+  },
+  {
+    path: '/games',
+    name: 'Games',
+    component: Games,
+    meta: {
+      isProtected: true
+    }
+  },
+  {
+    path: '/games/:id',
+    name: 'Game',
+    component: Game,
     meta: {
       isProtected: true
     }
