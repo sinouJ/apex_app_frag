@@ -9,7 +9,7 @@
 import SubTitle from '../../atoms/SubTitle.vue'
 
 export default {
-    name: 'CardHome',
+    name: 'Card',
     components: {
         SubTitle
     },

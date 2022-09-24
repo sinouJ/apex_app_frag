@@ -48,7 +48,7 @@
 <script>
 // Components
 import Header from '../../components/Header.vue'
-import CardHome from '../../components/Cards/CardHome.vue'
+import CardHome from '../../components/Cards/Card.vue'
 import Loader from '../../components/Loader.vue'
 
 // Utils
