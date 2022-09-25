@@ -1,5 +1,5 @@
 <template>
-    <router-link to="game/killrun" class="card">
+    <router-link to="/games/game/killrun" class="card">
         <div>
             <sub-title :title="title" :light="light"/>
             <slot name="main"></slot>

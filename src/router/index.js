@@ -65,7 +65,7 @@ const routes = [
     }
   },
   {
-    path: '/games/:id',
+    path: '/games/game/:game_id',
     name: 'Game',
     component: Game,
     meta: {
