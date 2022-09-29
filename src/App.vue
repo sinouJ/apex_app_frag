@@ -19,6 +19,11 @@ export default {
 </script>
 
 <style>
+  :root {
+      --fk-border-width: 0 !important;
+      --fk-color-border-focus: transparent !important;
+  }
+  
   #app {
     padding-bottom: 85px;
     padding-top: 95px;

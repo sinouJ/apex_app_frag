@@ -29,6 +29,8 @@ export default {
         width: fit-content;
         padding: 5px;
         border-radius: 6px;
+        min-width: 32px;
+        min-height: 32px;
     }
 
     .edit {
