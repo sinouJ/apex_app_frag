@@ -6,7 +6,7 @@ export default {
         return res;
     },
     deleteFeature: async (id) => {
-        const res = await FetchData.delete(`features/delete`, {
+        const res = await FetchData.delete(`features/delete`, { // TODO: Remove the 'delete' from the path
             id
         });
         return res;

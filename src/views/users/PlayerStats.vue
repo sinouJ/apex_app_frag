@@ -74,7 +74,7 @@
 // Components
 import HeaderReturn from '../../components/HeaderReturn.vue'
 import Loader from '../../components/Loader.vue'
-import CardHome from '../../components/Cards/CardHome.vue'
+import CardHome from '../../components/Cards/Card.vue'
 import CardLegendStats from '../../components/Cards/CardLegendStats.vue'
 import H3 from '../../atoms/H3.vue'
 import SubTitle from '../../atoms/SubTitle.vue'
