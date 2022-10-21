@@ -10,13 +10,15 @@ export const getGame = async (id) => {
     return response;
 }
 
-export const createGame = async (nb_players, nb_rounds, first_player, second_player, third_player) => {
-    const response = await FetchData.post("/games", {
+export const createGame = async (payload) => {
+    const { title, nb_players, nb_rounds, first_player, second_player, third_player } = payload;
+    const response = await FetchData.post("/minigames", {
+        title,
         nb_players,
         nb_rounds,
         first_player,
         second_player,
-        third_player,
+        third_player: third_player || null,
     });
     return response;
 }

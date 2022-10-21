@@ -2,7 +2,7 @@
     <div class="game">
         <header-return :title="title" />
         <div class="container">
-            <FormKit type="form" submit-label="Play">
+            <FormKit type="form" submit-label="Play" @submit="createGame">
                 <number
                     label="Nombre de joueurs"
                     :step="1"
@@ -11,6 +11,7 @@
                     :initialValue="2"
                     v-model="nb_players"
                     @update="update"
+                    name="nb_players"
                 />
                 <number
                     label="Nombre de rounds"
@@ -18,6 +19,7 @@
                     :min="1"
                     :max="10"
                     :initialValue="1"
+                    name="nb_rounds"
                 />
                 <Text
                     label="1er joueur"
@@ -62,9 +64,12 @@ export default {
     },
     methods: {
         update(nb) {
-            console.log('update', nb);
             this.$store.dispatch('games/UPDATE_NB_PLAYERS', nb);
         },
+        createGame(payload) {
+            payload.title = 'Kill run'
+            this.$store.dispatch('games/CREATE_GAME', payload);
+        }
     },
     computed: {
         ...mapGetters('games', {
