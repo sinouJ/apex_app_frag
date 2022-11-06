@@ -1,7 +1,7 @@
 import { FetchData } from "../utils/fetch";
 
 export const getGames = async () => {
-    const response = await FetchData.get("/games");
+    const response = await FetchData.get("minigames");
     return response;
 }
 
