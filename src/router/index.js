@@ -8,9 +8,9 @@ import Register from '../views/users/Register'
 import Login from '../views/users/Login'
 import PlayerStats from '../views/users/PlayerStats.vue'
 import Profile from '../views/users/Profile'
-import Departements from '../views/users/Departements'
 import Games from '../views/users/Games'
 import Game from '../views/users/Game'
+import GameDetails from '../views/users/GameDetails'
 
 // Admin views
 import AdminHome from '../views/admin/Home'
@@ -41,17 +41,17 @@ const routes = [
     }
   },
   {
-    path: '/community',
-    name: 'Community',
-    component: Community,
+    path: '/profile/game/:id',
+    name: 'GameDetails',
+    component: GameDetails,
     meta: {
       isProtected: true
     }
   },
   {
-    path: '/departements',
-    name: 'Departements',
-    component: Departements,
+    path: '/community',
+    name: 'Community',
+    component: Community,
     meta: {
       isProtected: true
     }

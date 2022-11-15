@@ -6,13 +6,13 @@ export const getGames = async () => {
 }
 
 export const getGame = async (id) => {
-    const response = await FetchData.get(`/games/${id}`);
+    const response = await FetchData.get(`minigames/${id}`);
     return response;
 }
 
 export const createGame = async (payload) => {
     const { title, nb_players, nb_rounds, first_player, second_player, third_player } = payload;
-    const response = await FetchData.post("/minigames", {
+    const response = await FetchData.post("minigames", {
         title,
         nb_players,
         nb_rounds,

@@ -2,7 +2,12 @@
     <div class="games">
         <Header title="games"/>
         <div class="container">
-            <card-game title="Kill run" class="game" :light="light">
+            <card-game 
+                title="Kill run" 
+                class="game" 
+                :light="light"
+                link="/games/game/killrun"
+            >
                 <template v-slot:main>
                     <div class="content">
                         <p>Le joueur qui fait le plus de frag lors d'une game remporte la manche</p>

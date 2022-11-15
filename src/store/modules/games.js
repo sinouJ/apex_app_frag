@@ -1,4 +1,4 @@
-import { createGame, getGames } from '../../api/games'
+import { createGame, getGames, getGame } from '../../api/games'
 
 const state = {
     games: Array,
@@ -9,6 +9,7 @@ const state = {
 
 const getters = {
     games: state => state.games,
+    game: state => state.game,
     nb_players: state => state.nb_players,
     nb_rounds: state => state.nb_rounds
 }
@@ -16,6 +17,9 @@ const getters = {
 const actions = {
     GET_GAMES: async ({ commit }) => {
         commit('getGames', await getGames(state))
+    },
+    GET_GAME: async ({ commit }, id) => {
+        commit('getGame', await getGame(id))
     },
     CREATE_GAME: async ({ commit }, payload) => {
         await commit('storeGame', payload)
@@ -35,6 +39,9 @@ const mutations = {
     },
     async getGames(state, payload) {
         state.games = payload
+    },
+    async getGame(state, payload) {
+        state.game = payload
     },
     postGame: async (state) => {
         const newGame = await createGame(state.game)

@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/games/game/killrun" class="card">
+    <router-link :to="link" class="card">
         <div>
             <sub-title :title="title" :light="light"/>
             <slot name="main"></slot>
@@ -20,7 +20,8 @@ export default {
         light: {
             type: Boolean,
             default: true
-        }
+        },
+        link: String
     }
 }
 </script>
